@@ -8,24 +8,43 @@ use Hammerstone\Sidecar\Runtime;
 
 class BrowsershotFunction extends LambdaFunction
 {
-    public function name()
-    {
-        return 'Browsershot Sidecar';
-    }
-
     public function handler()
     {
-        return 'resources/lambda/browsershot.handle';
+        return 'browsershot.handle';
+    }
+
+    public function name()
+    {
+        return 'browsershot';
     }
 
     public function package()
     {
+
         return Package::make()
-            ->setBasePath(__DIR__ . '/../../')
-            ->include([
-                'resources/lambda/browser.js',
-                'resources/lambda/browsershot.js',
+            ->includeStrings([
+                'browser.js' => $this->modifiedBrowserJs()
+            ])
+            ->includeExactly([
+                __DIR__ . '/../../resources/lambda/browsershot.js' => 'browsershot.js',
             ]);
+    }
+
+    /**
+     * We get puppeteer out of the layer, which spatie doesn't allow
+     * for. We'll just overwrite their browser.js to add it.
+     *
+     * @return string
+     */
+    protected function modifiedBrowserJs()
+    {
+        $browser = file_get_contents(base_path('vendor/spatie/browsershot/bin/browser.js'));
+
+        // Remove their reference.
+        $browser = str_replace('const puppet = (pup || require(\'puppeteer\'));', '', $browser);
+
+        // Add ours.
+        return "const puppet = require('chrome-aws-lambda').puppeteer; \n" . $browser;
     }
 
     public function runtime()
@@ -35,18 +54,17 @@ class BrowsershotFunction extends LambdaFunction
 
     public function memory()
     {
-        return 1024;
+        return 2048;
     }
 
     public function layers()
     {
         return [
             // https://github.com/shelfio/chrome-aws-lambda-layer
-            'arn:aws:lambda:eu-central-1:764866452798:layer:chrome-aws-lambda:25',
+            // 'arn:aws:lambda:eu-central-1:764866452798:layer:chrome-aws-lambda:25',
 
-            // Deploy my own layer?
-            // https://github.com/pearljobs/chrome-aws-lambda-layer-action
-            // https://github.com/pearljobs/chrome-aws-lambda-layer/blob/main/.github/workflows/publish.yml
+            // https://github.com/shelfio/chrome-aws-lambda-layer/blob/master/readme.md
+            'arn:aws:lambda:us-east-2:764866452798:layer:chrome-aws-lambda:25',
         ];
     }
 }

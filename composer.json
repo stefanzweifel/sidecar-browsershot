@@ -21,7 +21,7 @@
     "require": {
         "php": "^8.0",
         "hammerstone/sidecar": "^0.3",
-        "illuminate/contracts": "^8.73",
+        "illuminate/contracts": "^8.0",
         "spatie/browsershot": "^3.52",
         "spatie/laravel-package-tools": "^1.9.2"
     },
