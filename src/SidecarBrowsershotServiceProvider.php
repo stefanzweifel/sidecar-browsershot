@@ -15,7 +15,6 @@ class SidecarBrowsershotServiceProvider extends PackageServiceProvider
          * More info: https://github.com/spatie/laravel-package-tools
          */
         $package
-            ->name('sidecar-browsershot')
-            ->hasConfigFile();
+            ->name('sidecar-browsershot');
     }
 }
