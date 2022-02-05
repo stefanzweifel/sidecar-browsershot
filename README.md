@@ -7,8 +7,6 @@
 
 This package allows you to run [Browsershot](https://github.com/spatie/browsershot) on [AWS Lambda](https://aws.amazon.com/lambda/) through [Sidecar](https://github.com/hammerstonedev/sidecar).
 
-> 🚨 This is a work in progress!
-
 You won't need to install Node, Puppeteer or Google Chrome on your server. The heavy lifting of booting a headless Google Chrome instance is happening on AWS Lambda.
 
 ## Requirements

@@ -12,6 +12,12 @@ class BrowsershotLambda extends Browsershot
 {
     protected function callBrowser(array $command)
     {
+        $url = Arr::get($command, 'url');
+
+        if (Str::startsWith($url, 'file://')) {
+            $command['_html'] = file_get_contents($url);
+        }
+
         $response = BrowsershotFunction::execute($command);
 
         if ($response->isError()) {

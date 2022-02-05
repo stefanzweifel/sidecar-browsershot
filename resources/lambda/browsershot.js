@@ -19,6 +19,11 @@ exports.handle = async function (event) {
         event.options.path = '/tmp/browsershot';
     }
 
+    if (event._html) {
+        fs.writeFileSync('/tmp/index.html', event._html);
+        event.url = 'file:///tmp/index.html';
+    }
+
     // Get the executable path from the chrome layer.
     event.options.executablePath = await chromium.executablePath;
 
