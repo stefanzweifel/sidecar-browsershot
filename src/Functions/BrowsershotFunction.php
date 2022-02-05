@@ -20,10 +20,9 @@ class BrowsershotFunction extends LambdaFunction
 
     public function package()
     {
-
         return Package::make()
             ->includeStrings([
-                'browser.js' => $this->modifiedBrowserJs()
+                'browser.js' => $this->modifiedBrowserJs(),
             ])
             ->includeExactly([
                 __DIR__ . '/../../resources/lambda/browsershot.js' => 'browsershot.js',

@@ -1,4 +1,5 @@
 <?php
+
 namespace Wnx\SidecarBrowsershot;
 
 use Illuminate\Support\Arr;
