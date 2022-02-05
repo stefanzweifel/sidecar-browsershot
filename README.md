@@ -1,20 +1,21 @@
-# Run Browsershot with Sidecar
+# Run Browsershot on AWS Lambda with Sidecar for Laravel
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/wnx/sidecar-browsershot.svg?style=flat-square)](https://packagist.org/packages/wnx/sidecar-browsershot)
 [![GitHub Tests Action Status](https://img.shields.io/github/workflow/status/stefanzweifel/sidecar-browsershot/run-tests?label=tests)](https://github.com/stefanzweifel/sidecar-browsershot/actions?query=workflow%3Arun-tests+branch%3Amain)
 [![GitHub Code Style Action Status](https://img.shields.io/github/workflow/status/stefanzweifel/sidecar-browsershot/Check%20&%20fix%20styling?label=code%20style)](https://github.com/stefanzweifel/sidecar-browsershot/actions?query=workflow%3A"Check+%26+fix+styling"+branch%3Amain)
 [![Total Downloads](https://img.shields.io/packagist/dt/wnx/sidecar-browsershot.svg?style=flat-square)](https://packagist.org/packages/wnx/sidecar-browsershot)
 
+This package allows you to run [Browsershot](https://github.com/spatie/browsershot) on [AWS Lambda](https://aws.amazon.com/lambda/) through [Sidecar](https://github.com/hammerstonedev/sidecar).
+
 > 🚨 This is a work in progress!
 
-This package allows you to run [`spatie/browsershot`](https://github.com/spatie/browsershot) through [`hammerstone/sidecar`](https://github.com/hammerstonedev/sidecar) on AWS Lambda.
-This means that you don't have to install Chrome or Puppeteer on your server.    
-The browser runs on AWS Lambda. 
+You won't need to install Node, Puppeteer or Google Chrome on your server. The heavy lifting of booting a headless Google Chrome instance is happening on AWS Lambda.
 
-Before you begin:
+## Requirements
 
-- This package uses its own `browser.js` to control Puppeteer. It's possible that a new feature of `spatie/browsershot` has not made it yet into this package. (The goal is to use the original `spatie/browsershot` `browser.js` file for feature parity)
-- The Lambda function currently disables Chromes Sandbox in order to be executed on AWS Lambda.
+This package requires that [`spatie/browsershot`](https://github.com/spatie/browsershot) and [`hammerstone/sidecar`](https://github.com/hammerstonedev/sidecar) have been installed in your Laravel application.
+
+Follow their installation and configuration instructions. (You can skip the installation of puppeteer and Google Chrome for Browsershot thought.)
 
 ## Installation
 
@@ -22,20 +23,6 @@ You can install the package via composer:
 
 ```bash
 composer require wnx/sidecar-browsershot
-```
-(Note that both [`spatie/browsershot`](https://github.com/spatie/browsershot) and [`hammerstone/sidecar`](https://github.com/hammerstonedev/sidecar) must be installed too.)
-
-You can publish the config file with:
-
-```bash
-php artisan vendor:publish --tag="sidecar-browsershot-config"
-```
-
-This is the contents of the published config file:
-
-```php
-return [
-];
 ```
 
 Register the `BrowsershotFunction::class` in your `sidecar.php` config file.
@@ -55,24 +42,30 @@ Deploy the Lambda function by running:
 php artisan sidecar:deploy --activate
 ```
 
-See [Sidecar docs](https://hammerstone.dev/sidecar/docs/main/functions/deploying) for details.
+See [Sidecar documentation](https://hammerstone.dev/sidecar/docs/main/functions/deploying) for details.
+
+Note: `sidecar-browsershot`
 
 ## Usage
 
-> - TBD
-> - `save()`-methods coming from `spatie/browsershot` do not work yet. You are responsible to store the file on a filesystem.
+You can use `BrowsershotLambda` like the default `Browsershot`-class coming from the Spatie package.
+All you need to do is replace `Browsershot` with `BrowsershotLambda`.
 
 ```php
 use Wnx\SidecarBrowsershot\BrowsershotLambda;
 
-$html = BrowsershotLambda::url('https://en.wikipedia.org/wiki/Special:Random')->bodyHtml();
-File::put('example.html', $html);
+// an image will be saved
+BrowsershotLambda::url('https://example.com')->save($pathToImage);
 
-$screenshot = BrowsershotLambda::url('https://en.wikipedia.org/wiki/Special:Random')->screenshot();
-File::put('example.jpg', $screenshot);
+// a pdf will be saved
+BrowsershotLambda::url('https://example.com')->save('example.pdf');
 
-$pdf = BrowsershotLambda::url('https://en.wikipedia.org/wiki/Special:Random')->pdf();
-File::put('example.pdf', $pdf);
+// save your own HTML to a PDF
+BrowsershotLambda::html('<h1>Hello world!!</h1>')->save('example.pdf');
+
+// Get HTML of a URL and store it on a given disk
+$html = BrowsershotLambda::url('https://example.com')->bodyHtml();
+Storage::disk('s3')->put('example.html', $html);
 ```
 
 ## Testing
@@ -96,6 +89,7 @@ Please review [our security policy](../../security/policy) on how to report secu
 ## Credits
 
 - [Stefan Zweifel](https://github.com/stefanzweifel)
+- [Aaron Francis](https://github.com/aarondfrancis)
 - [All Contributors](../../contributors)
 
 ## License
