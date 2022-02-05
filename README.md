@@ -42,8 +42,6 @@ php artisan sidecar:deploy --activate
 
 See [Sidecar documentation](https://hammerstone.dev/sidecar/docs/main/functions/deploying) for details.
 
-Note: `sidecar-browsershot`
-
 ## Usage
 
 You can use `BrowsershotLambda` like the default `Browsershot`-class coming from the Spatie package.
