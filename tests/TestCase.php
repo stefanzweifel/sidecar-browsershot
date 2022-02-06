@@ -3,7 +3,6 @@
 namespace Wnx\SidecarBrowsershot\Tests;
 
 use Hammerstone\Sidecar\Providers\SidecarServiceProvider;
-use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Foundation\Bootstrap\LoadEnvironmentVariables;
 use Orchestra\Testbench\TestCase as Orchestra;
 use Wnx\SidecarBrowsershot\Functions\BrowsershotFunction;
