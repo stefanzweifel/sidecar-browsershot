@@ -37,7 +37,11 @@ class BrowsershotFunction extends LambdaFunction
      */
     protected function modifiedBrowserJs()
     {
-        $browser = file_get_contents(base_path('vendor/spatie/browsershot/bin/browser.js'));
+        if (app()->environment('testing')) {
+            $browser = file_get_contents('vendor/spatie/browsershot/bin/browser.js');
+        } else {
+            $browser = file_get_contents(base_path('vendor/spatie/browsershot/bin/browser.js'));
+        }
 
         // Remove their reference.
         $browser = str_replace('const puppet = (pup || require(\'puppeteer\'));', '', $browser);

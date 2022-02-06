@@ -2,6 +2,7 @@
 
 namespace Wnx\SidecarBrowsershot;
 
+use Hammerstone\Sidecar\Results\SettledResult;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use Spatie\Browsershot\Browsershot;
@@ -33,9 +34,12 @@ class BrowsershotLambda extends Browsershot
         }
     }
 
-    protected function throwError($response)
+    /**
+     * @throws ElementNotFound
+     */
+    protected function throwError(SettledResult $response): void
     {
-        $message = $response->errorAsString();
+        $message = Arr::get($response->body(), 'errorMessage', 'Unknown error.');
 
         if (Str::contains($message, 'Error: No node found for selector')) {
             $selector = Str::after($message, 'Error: No node found for selector: ');

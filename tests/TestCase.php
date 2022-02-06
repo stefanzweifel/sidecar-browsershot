@@ -2,35 +2,33 @@
 
 namespace Wnx\SidecarBrowsershot\Tests;
 
-use Illuminate\Database\Eloquent\Factories\Factory;
+use Hammerstone\Sidecar\Providers\SidecarServiceProvider;
+use Illuminate\Foundation\Bootstrap\LoadEnvironmentVariables;
 use Orchestra\Testbench\TestCase as Orchestra;
+use Wnx\SidecarBrowsershot\Functions\BrowsershotFunction;
 use Wnx\SidecarBrowsershot\SidecarBrowsershotServiceProvider;
 
 class TestCase extends Orchestra
 {
-    protected function setUp(): void
-    {
-        parent::setUp();
-
-        Factory::guessFactoryNamesUsing(
-            fn (string $modelName) => 'Wnx\\SidecarBrowsershot\\Database\\Factories\\'.class_basename($modelName).'Factory'
-        );
-    }
-
     protected function getPackageProviders($app)
     {
         return [
             SidecarBrowsershotServiceProvider::class,
+            SidecarServiceProvider::class,
         ];
     }
 
     public function getEnvironmentSetUp($app)
     {
-        config()->set('database.default', 'testing');
+        $app->useEnvironmentPath(__DIR__.'/..');
+        $app->bootstrapWith([LoadEnvironmentVariables::class]);
 
-        /*
-        $migration = include __DIR__.'/../database/migrations/create_sidecar-browsershot_table.php.stub';
-        $migration->up();
-        */
+        config()->set('sidecar.functions', [BrowsershotFunction::class]);
+        config()->set('sidecar.env', env('testing'));
+        config()->set('sidecar.aws_key', env('SIDECAR_ACCESS_KEY_ID'));
+        config()->set('sidecar.aws_secret', env('SIDECAR_SECRET_ACCESS_KEY'));
+        config()->set('sidecar.aws_region', env('SIDECAR_REGION'));
+        config()->set('sidecar.aws_bucket', env('SIDECAR_ARTIFACT_BUCKET_NAME'));
+        config()->set('sidecar.execution_role', env('SIDECAR_EXECUTION_ROLE'));
     }
 }
