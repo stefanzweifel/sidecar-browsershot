@@ -71,4 +71,4 @@ it('throws LambdaExecutionException error if browsershot fails', function () {
     BrowsershotLambda::html('<h1>Hello world!!</h1>')
         ->select('#does-not-exist')
         ->bodyHtml();
-})->expectException(LambdaExecutionException::class)->only();
+})->expectException(LambdaExecutionException::class);
