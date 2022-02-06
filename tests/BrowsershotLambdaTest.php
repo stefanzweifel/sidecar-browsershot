@@ -1,5 +1,6 @@
 <?php
 
+use Hammerstone\Sidecar\Exceptions\LambdaExecutionException;
 use Wnx\SidecarBrowsershot\BrowsershotLambda;
 use function Pest\Laravel\artisan;
 
@@ -65,3 +66,9 @@ it('returns raw html from html', function () {
     $this->assertEquals("<html><head></head><body><h1>Hello world!!</h1></body></html>\n", $html);
 
 });
+
+it('throws LambdaExecutionException error if browsershot fails', function () {
+    BrowsershotLambda::html('<h1>Hello world!!</h1>')
+        ->select('#does-not-exist')
+        ->bodyHtml();
+})->expectException(LambdaExecutionException::class)->only();
