@@ -34,7 +34,7 @@ jobs:
           coverage: none
 
       - name: Setup testbench.yaml
-        run: cp testbench.yaml.example testbench.yaml
+        run: cp testbench.example.yaml testbench.yaml
 
       - name: Deploy Lambda function
         run: vendor/bin/testbench sidecar-browsershot:setup --no-interaction
