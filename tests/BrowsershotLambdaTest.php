@@ -5,7 +5,7 @@ use function Pest\Laravel\artisan;
 use Wnx\SidecarBrowsershot\BrowsershotLambda;
 
 beforeEach(function () {
-    artisan('sidecar:deploy --activate --env=testing');
+    // artisan('sidecar:deploy --activate --env=testing');
 
     if (file_exists('example.pdf')) {
         unlink('example.pdf');
