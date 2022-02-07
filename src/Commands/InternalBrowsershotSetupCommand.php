@@ -30,8 +30,9 @@ class InternalBrowsershotSetupCommand extends Command
 
         $deploy = $this->confirm("Deploy Lambda function to {$region} and bucket {$bucket}?", true);
 
-        if (!$deploy) {
+        if (! $deploy) {
             $this->info('Nothing deployed.');
+
             return self::SUCCESS;
         }
 
