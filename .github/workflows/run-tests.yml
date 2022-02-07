@@ -33,6 +33,18 @@ jobs:
           extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, bcmath, soap, intl, gd, exif, iconv, imagick, fileinfo
           coverage: none
 
+      - name: Setup testbench.yaml
+        run: cp testbench.yaml.example testbench.yaml
+
+      - name: Deploy Lambda function
+        run: vendor/bin/testbench sidecar-browsershot:setup --no-interaction
+        env:
+          SIDECAR_ACCESS_KEY_ID: ${{secrets.SIDECAR_ACCESS_KEY_ID}}
+          SIDECAR_SECRET_ACCESS_KEY: ${{secrets.SIDECAR_SECRET_ACCESS_KEY}}
+          SIDECAR_REGION: ${{secrets.SIDECAR_REGION}}
+          SIDECAR_ARTIFACT_BUCKET_NAME: ${{secrets.SIDECAR_ARTIFACT_BUCKET_NAME}}
+          SIDECAR_EXECUTION_ROLE: ${{secrets.SIDECAR_EXECUTION_ROLE}}
+
       - name: Install dependencies
         run: |
           composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" --no-interaction --no-update

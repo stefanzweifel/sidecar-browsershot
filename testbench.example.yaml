@@ -1,0 +1,3 @@
+providers:
+  - Hammerstone\Sidecar\Providers\SidecarServiceProvider
+  - Wnx\SidecarBrowsershot\SidecarBrowsershotServiceProvider
