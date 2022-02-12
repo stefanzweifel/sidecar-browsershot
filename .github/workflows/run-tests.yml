@@ -38,8 +38,18 @@ jobs:
           composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" --no-interaction --no-update
           composer update --${{ matrix.stability }} --prefer-dist --no-interaction
 
-      - name: Setup testbench.yaml
-        run: cp testbench.example.yaml testbench.yaml
+      - name: Setup Testbench
+        run: |
+          echo "env:
+          - SIDECAR_ACCESS_KEY_ID: \${{secrets.SIDECAR_ACCESS_KEY_ID}}
+          - SIDECAR_SECRET_ACCESS_KEY: \${{secrets.SIDECAR_SECRET_ACCESS_KEY}}
+          - SIDECAR_REGION: \${{secrets.SIDECAR_REGION}}
+          - SIDECAR_ARTIFACT_BUCKET_NAME: \${{secrets.SIDECAR_ARTIFACT_BUCKET_NAME}}
+          - SIDECAR_EXECUTION_ROLE: \${{secrets.SIDECAR_EXECUTION_ROLE}}
+
+          providers:
+            - Hammerstone\Sidecar\Providers\SidecarServiceProvider
+            - Wnx\SidecarBrowsershot\SidecarBrowsershotServiceProvider" >> testbench.yaml
 
       - name: Setup .env
         run: cp .env.example .env

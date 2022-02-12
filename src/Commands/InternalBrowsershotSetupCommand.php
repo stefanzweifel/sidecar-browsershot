@@ -29,6 +29,7 @@ class InternalBrowsershotSetupCommand extends Command
         config()->set('sidecar.execution_role', env('SIDECAR_EXECUTION_ROLE'));
 
         $deploy = $this->confirm("Deploy Lambda function to {$region} and bucket {$bucket}?", true);
+        $this->info("Deploying Lambda function to {$region} and bucket {$bucket}.");
 
         if (! $deploy) {
             $this->info('Nothing deployed.');
