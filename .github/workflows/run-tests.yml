@@ -41,6 +41,9 @@ jobs:
       - name: Setup testbench.yaml
         run: cp testbench.example.yaml testbench.yaml
 
+      - name: Setup .env
+        run: cp .env.example .env
+
       - name: Deploy Lambda function
         run: vendor/bin/testbench sidecar-browsershot:setup --no-interaction
         env:
@@ -52,3 +55,9 @@ jobs:
 
       - name: Execute tests
         run: vendor/bin/pest
+        env:
+          SIDECAR_ACCESS_KEY_ID: ${{secrets.SIDECAR_ACCESS_KEY_ID}}
+          SIDECAR_SECRET_ACCESS_KEY: ${{secrets.SIDECAR_SECRET_ACCESS_KEY}}
+          SIDECAR_REGION: ${{secrets.SIDECAR_REGION}}
+          SIDECAR_ARTIFACT_BUCKET_NAME: ${{secrets.SIDECAR_ARTIFACT_BUCKET_NAME}}
+          SIDECAR_EXECUTION_ROLE: ${{secrets.SIDECAR_EXECUTION_ROLE}}
