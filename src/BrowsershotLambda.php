@@ -39,7 +39,7 @@ class BrowsershotLambda extends Browsershot
      */
     protected function throwError(SettledResult $response): void
     {
-        $message = Arr::get($response->body(), 'errorMessage', 'Unknown error.');
+        $message = $response->errorAsString();
 
         if (Str::contains($message, 'Error: No node found for selector')) {
             $selector = Str::after($message, 'Error: No node found for selector: ');
