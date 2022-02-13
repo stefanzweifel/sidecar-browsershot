@@ -15,6 +15,8 @@ class BrowsershotLambda extends Browsershot
     {
         $url = Arr::get($command, 'url');
 
+        // If Browsershot should render arbitrary HTML, pass the HTML to the Lambda.
+        // Lambda can't access the local file system.
         if (Str::startsWith($url, 'file://')) {
             $command['_html'] = file_get_contents($url);
         }
@@ -39,7 +41,7 @@ class BrowsershotLambda extends Browsershot
      */
     protected function throwError(SettledResult $response): void
     {
-        $message = Arr::get($response->body(), 'errorMessage', 'Unknown error.');
+        $message = $response->errorAsString();
 
         if (Str::contains($message, 'Error: No node found for selector')) {
             $selector = Str::after($message, 'Error: No node found for selector: ');

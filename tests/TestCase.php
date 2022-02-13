@@ -24,7 +24,7 @@ class TestCase extends Orchestra
         $app->bootstrapWith([LoadEnvironmentVariables::class]);
 
         config()->set('sidecar.functions', [BrowsershotFunction::class]);
-        config()->set('sidecar.env', env('testing'));
+        config()->set('sidecar.env', 'testing');
         config()->set('sidecar.aws_key', env('SIDECAR_ACCESS_KEY_ID'));
         config()->set('sidecar.aws_secret', env('SIDECAR_SECRET_ACCESS_KEY'));
         config()->set('sidecar.aws_region', env('SIDECAR_REGION'));

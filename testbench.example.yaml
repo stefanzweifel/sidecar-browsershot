@@ -1,0 +1,10 @@
+env:
+  - SIDECAR_ACCESS_KEY_ID=
+  - SIDECAR_SECRET_ACCESS_KEY=
+  - SIDECAR_REGION=
+  - SIDECAR_ARTIFACT_BUCKET_NAME=
+  - SIDECAR_EXECUTION_ROLE=
+
+providers:
+  - Hammerstone\Sidecar\Providers\SidecarServiceProvider
+  - Wnx\SidecarBrowsershot\SidecarBrowsershotServiceProvider
