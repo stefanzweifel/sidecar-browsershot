@@ -66,7 +66,7 @@ Storage::disk('s3')->put('example.html', $html);
 
 ## Testing
 
-The testsuite makes connections to AWS and runs the deployed Lambda function. In order to run the test suite, you will need an active [AWS account](https://aws.amazon.com/).
+The testsuite makes connections to AWS and runs the deployed Lambda function. In order to run the testsuite, you will need an active [AWS account](https://aws.amazon.com/).
 
 We can use the native `sidecar:configure` artisan command to create the necessary AWS credentials for Sidecar. First copy the `testbench.example.yaml` file to `testbench.yaml`.
 Then run `./vendor/bin/testbench sidecar:configure` to start the Sidecar setup process. (You only have to do the setup once)
@@ -79,7 +79,7 @@ cp .env.example .env
 
 After finishing the Sidecar setup process, you will have received a couple of `SIDECAR_*` environment variables. Add these credentials to `testbench.yaml` and `.env`.
 
-Now we can deploy our local `BrowsershotFunction` to AWS Lambda. Run the following command in your terminal, before executing the test suite.
+Now we can deploy our local `BrowsershotFunction` to AWS Lambda. Run the following command in your terminal, before executing the testsuite.
 
 ```bash
 ./vendor/bin/testbench sidecar-browsershot:setup
