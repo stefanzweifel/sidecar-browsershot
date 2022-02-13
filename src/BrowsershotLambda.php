@@ -15,6 +15,8 @@ class BrowsershotLambda extends Browsershot
     {
         $url = Arr::get($command, 'url');
 
+        // If Browsershot should render arbitrary HTML, pass the HTML to the Lambda.
+        // Lambda can't access the local file system.
         if (Str::startsWith($url, 'file://')) {
             $command['_html'] = file_get_contents($url);
         }

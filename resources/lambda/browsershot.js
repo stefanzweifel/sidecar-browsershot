@@ -19,6 +19,8 @@ exports.handle = async function (event) {
         event.options.path = '/tmp/browsershot';
     }
 
+    // If arbitrary HTML should be rendered, store the passed
+    // HTML in a temporary file and use the path as the URL.
     if (event._html) {
         fs.writeFileSync('/tmp/index.html', event._html);
         event.url = 'file:///tmp/index.html';
