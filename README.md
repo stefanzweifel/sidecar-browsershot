@@ -13,7 +13,7 @@ You won't need to install Node, Puppeteer or Google Chrome on your server. The h
 
 This package requires that [`spatie/browsershot`](https://github.com/spatie/browsershot) and [`hammerstone/sidecar`](https://github.com/hammerstonedev/sidecar) have been installed in your Laravel application.
 
-Follow their installation and configuration instructions. (You can skip the installation of puppeteer and Google Chrome for Browsershot thought.)
+Follow their installation and configuration instructions. (You can skip the installation of puppeteer and Google Chrome for Browsershot though.)
 
 ## Installation
 
