@@ -55,10 +55,6 @@ jobs:
           SIDECAR_ARTIFACT_BUCKET_NAME=${{secrets.SIDECAR_ARTIFACT_BUCKET_NAME}}
           SIDECAR_EXECUTION_ROLE=${{secrets.SIDECAR_EXECUTION_ROLE}}" >> .env
 
-      - run: cat testbench.yaml
-      - run: cat .env
-      - run: vendor/bin/testbench list
-
         # Deploy Lambda function before running the test suite.
       - name: Deploy Lambda function
         run: vendor/bin/testbench sidecar-browsershot:setup --no-interaction -vvv
