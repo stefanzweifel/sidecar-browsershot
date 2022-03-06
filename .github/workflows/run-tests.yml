@@ -62,10 +62,12 @@ jobs:
           SIDECAR_EXECUTION_ROLE=${{secrets.SIDECAR_EXECUTION_ROLE}}" >> .env
 
       - run: cat testbench.yaml
+      - run: cat .env
+      - run: vendor/bin/testbench list
 
         # Deploy Lambda function before running the test suite.
       - name: Deploy Lambda function
-        run: vendor/bin/testbench sidecar-browsershot:setup --no-interaction
+        run: vendor/bin/testbench sidecar-browsershot:setup --no-interaction -vvv
         env:
           SIDECAR_ACCESS_KEY_ID: ${{secrets.SIDECAR_ACCESS_KEY_ID}}
           SIDECAR_SECRET_ACCESS_KEY: ${{secrets.SIDECAR_SECRET_ACCESS_KEY}}
