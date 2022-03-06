@@ -54,6 +54,8 @@ jobs:
             - Hammerstone\Sidecar\Providers\SidecarServiceProvider
             - Wnx\SidecarBrowsershot\SidecarBrowsershotServiceProvider" >> testbench.yaml
 
+      - run: cat testbench.yaml
+
         # Deploy Lambda function before running the test suite.
       - name: Deploy Lambda function
         run: vendor/bin/testbench sidecar-browsershot:setup --no-interaction
