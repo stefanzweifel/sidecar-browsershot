@@ -10,6 +10,8 @@ use Wnx\SidecarBrowsershot\SidecarBrowsershotServiceProvider;
 
 class TestCase extends Orchestra
 {
+    protected $loadEnvironmentVariables = true;
+
     protected function getPackageProviders($app)
     {
         return [
