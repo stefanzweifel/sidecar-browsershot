@@ -77,7 +77,7 @@ cp .env.example .env
 ./vendor/bin/testbench sidecar:configure
 ```
 
-After finishing the Sidecar setup process, you will have received a couple of `SIDECAR_*` environment variables. Add these credentials to `testbench.yaml` and `.env`.
+After finishing the Sidecar setup process, you will have received a couple of `SIDECAR_*` environment variables. Add these credentials to `.env`.
 
 Now we can deploy our local `BrowsershotFunction` to AWS Lambda. Run the following command in your terminal, before executing the testsuite.
 
