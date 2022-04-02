@@ -28,8 +28,8 @@ class BrowsershotLambda extends Browsershot
             $this->throwError($response);
         }
 
+        $s3 = Arr::get($command, 'options.s3');
         $path = Arr::get($command, 'options.path');
-        $s3 = Arr::get($command, 'options.path');
 
         if ($path && !$s3) {
             file_put_contents($path, base64_decode($response->body()));
@@ -60,7 +60,7 @@ class BrowsershotLambda extends Browsershot
     /**
      * @throws CouldNotTakeBrowsershot
      */
-    protected function saveToS3(string $targetPath, string $disk = 's3')
+    public function saveToS3(string $targetPath, string $disk = 's3')
     {
         $this->setOption('s3', [
             'path' => $targetPath,
@@ -78,10 +78,10 @@ class BrowsershotLambda extends Browsershot
             ? $this->createPdfCommand($targetPath)
             : $this->createScreenshotCommand($targetPath);
 
-        $result = $this->callBrowser($command);
+        $output = $this->callBrowser($command);
 
-        if (empty($result['ETag'])) {
-            throw CouldNotTakeBrowsershot::chromeOutputEmpty("$targetPath on S3 disk: $disk", $command);
+        if (empty($output)) {
+            throw CouldNotTakeBrowsershot::chromeOutputEmpty("$targetPath on S3 disk: $disk", $output, $command);
         }
     }
 }
