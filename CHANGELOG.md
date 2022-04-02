@@ -5,7 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-## [Unreleased](https://github.com/stefanzweifel/sidecar-browsershot/compare/v1.0.0...HEAD)
+## [Unreleased](https://github.com/stefanzweifel/sidecar-browsershot/compare/v1.0.1...HEAD)
+
+## [v1.0.1](https://github.com/stefanzweifel/sidecar-browsershot/compare/v1.0.0...v1.0.1) - 2022-04-02
+
+## Fixed
+
+- Browsershot 3.52.4 comptability ([#12](https://github.com/stefanzweifel/sidecar-browsershot/pull/12))
 
 ## [v1.0.0](https://github.com/stefanzweifel/sidecar-browsershot/compare/v0.2.0...v1.0.0) - 2022-03-06
 
