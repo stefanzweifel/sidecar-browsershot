@@ -11,7 +11,7 @@ use Wnx\SidecarBrowsershot\Functions\BrowsershotFunction;
 
 class BrowsershotLambda extends Browsershot
 {
-    protected function callBrowser(array $command)
+    protected function callBrowser(array $command): string
     {
         $url = Arr::get($command, 'url');
 
