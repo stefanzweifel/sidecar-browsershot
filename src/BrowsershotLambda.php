@@ -11,7 +11,7 @@ use Wnx\SidecarBrowsershot\Functions\BrowsershotFunction;
 
 class BrowsershotLambda extends Browsershot
 {
-    protected function callBrowser(array $command)
+    protected function callBrowser(array $command): string
     {
         $url = Arr::get($command, 'url');
 
@@ -31,6 +31,7 @@ class BrowsershotLambda extends Browsershot
 
         if ($path) {
             file_put_contents($path, base64_decode($response->body()));
+            return $path;
         } else {
             return $response->body();
         }
