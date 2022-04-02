@@ -31,6 +31,7 @@ class BrowsershotLambda extends Browsershot
 
         if ($path) {
             file_put_contents($path, base64_decode($response->body()));
+            return $path;
         } else {
             return $response->body();
         }
