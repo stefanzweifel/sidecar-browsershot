@@ -23,6 +23,12 @@ You can install the package via composer:
 composer require wnx/sidecar-browsershot
 ```
 
+You can publish the config file with:
+
+```bash
+php artisan vendor:publish --tag="sidecar-browsershot-config"
+```
+
 Register the `BrowsershotFunction::class` in your `sidecar.php` config file.
 
 ```php
