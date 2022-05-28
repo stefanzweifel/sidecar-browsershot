@@ -5,6 +5,7 @@ namespace Wnx\SidecarBrowsershot\Functions;
 use Hammerstone\Sidecar\LambdaFunction;
 use Hammerstone\Sidecar\Package;
 use Hammerstone\Sidecar\Runtime;
+use Hammerstone\Sidecar\WarmingConfig;
 
 class BrowsershotFunction extends LambdaFunction
 {
@@ -57,16 +58,23 @@ class BrowsershotFunction extends LambdaFunction
 
     public function memory()
     {
-        return 2048;
+        return config('sidecar-browsershot.memory');
+    }
+
+    public function warmingConfig()
+    {
+        return WarmingConfig::instances(config('sidecar-browsershot.warming'));
     }
 
     public function layers()
     {
+        if ($layer = config('sidecar-browsershot.layer')) {
+            return [$layer];
+        }
+
         $region = config('sidecar.aws_region');
 
-        return [
-            // https://github.com/shelfio/chrome-aws-lambda-layer
-            "arn:aws:lambda:{$region}:764866452798:layer:chrome-aws-lambda:25",
-        ];
+        // https://github.com/shelfio/chrome-aws-lambda-layer
+        return ["arn:aws:lambda:{$region}:764866452798:layer:chrome-aws-lambda:25"];
     }
 }
