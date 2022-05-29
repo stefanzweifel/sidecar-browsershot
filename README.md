@@ -70,6 +70,18 @@ $html = BrowsershotLambda::url('https://example.com')->bodyHtml();
 Storage::disk('s3')->put('example.html', $html);
 ```
 
+## Warming
+
+sidecar-browsershot supports [warming](https://hammerstone.dev/sidecar/docs/main/functions/warming) for faster execution.
+
+To enable this feature set the `SIDECAR_BROWSERSHOT_WARMING_INSTANCES` variable in your `.env` to the desired number of instances Sidecar should warm for you.
+
+```shell
+SIDECAR_BROWSERSHOT_WARMING_INSTANCES=5
+```
+
+Alternatively you can publish the `sidecar-browsershot.php` config file and change the `warming` setting yourself.
+
 ## Testing
 
 The testsuite makes connections to AWS and runs the deployed Lambda function. In order to run the testsuite, you will need an active [AWS account](https://aws.amazon.com/).
