@@ -23,6 +23,12 @@ You can install the package via composer:
 composer require wnx/sidecar-browsershot
 ```
 
+You can publish the config file with:
+
+```bash
+php artisan vendor:publish --tag="sidecar-browsershot-config"
+```
+
 Register the `BrowsershotFunction::class` in your `sidecar.php` config file.
 
 ```php
@@ -63,6 +69,18 @@ BrowsershotLambda::html('<h1>Hello world!!</h1>')->save('example.pdf');
 $html = BrowsershotLambda::url('https://example.com')->bodyHtml();
 Storage::disk('s3')->put('example.html', $html);
 ```
+
+## Warming
+
+sidecar-browsershot supports [warming](https://hammerstone.dev/sidecar/docs/main/functions/warming) for faster execution.
+
+To enable this feature set the `SIDECAR_BROWSERSHOT_WARMING_INSTANCES` variable in your `.env` to the desired number of instances Sidecar should warm for you.
+
+```shell
+SIDECAR_BROWSERSHOT_WARMING_INSTANCES=5
+```
+
+Alternatively you can publish the `sidecar-browsershot.php` config file and change the `warming` setting yourself.
 
 ## Testing
 

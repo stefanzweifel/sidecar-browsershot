@@ -17,6 +17,7 @@ class SidecarBrowsershotServiceProvider extends PackageServiceProvider
          */
         $package
             ->name('sidecar-browsershot')
+            ->hasConfigFile()
             ->hasCommand(InternalBrowsershotSetupCommand::class);
     }
 }
