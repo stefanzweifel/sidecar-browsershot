@@ -1,6 +1,8 @@
 <?php
 
 use Hammerstone\Sidecar\Exceptions\LambdaExecutionException;
+use Illuminate\Support\Facades\Storage;
+use Spatie\Browsershot\Exceptions\CouldNotTakeBrowsershot;
 use Wnx\SidecarBrowsershot\BrowsershotLambda;
 
 beforeEach(function () {
@@ -66,3 +68,29 @@ it('throws LambdaExecutionException error if browsershot fails', function () {
         ->select('#does-not-exist')
         ->bodyHtml();
 })->expectException(LambdaExecutionException::class);
+
+
+it('stores screenshot on s3 bucket', function () {
+    $this->assertFalse(Storage::disk('s3')->exists('example.jpg'));
+
+    BrowsershotLambda::url('https://example.com')->saveToS3('example.jpg');
+
+    $this->assertTrue(Storage::disk('s3')->exists('example.jpg'));
+    Storage::disk('s3')->delete('example.jpg');
+    $this->assertFalse(Storage::disk('s3')->exists('example.jpg'));
+});
+
+it('stores pdf in s3 bucket', function () {
+    $this->assertFalse(Storage::disk('s3')->exists('example.pdf'));
+
+    BrowsershotLambda::url('https://example.com')->saveToS3('example.pdf');
+
+    $this->assertTrue(Storage::disk('s3')->exists('example.pdf'));
+    Storage::disk('s3')->delete('example.pdf');
+    $this->assertFalse(Storage::disk('s3')->exists('example.pdf'));
+});
+
+test('it throws CouldNotTakeBrowsershot Exception if no file extension is passed to saveToS3', function () {
+    BrowsershotLambda::html('<h1>Hello world!!</h1>')
+        ->saveToS3('example');
+})->expectException(CouldNotTakeBrowsershot::class);

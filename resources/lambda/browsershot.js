@@ -54,7 +54,13 @@ exports.handle = async function (event) {
         // If the file destination is S3, then write
         // the file and return the ETag as confimation.
         if (event.options.s3) {
-            const s3 = new AWS.S3({ region: event.options.s3.region });
+            const accessKeyId = event.options.s3.key;
+            const secretAccessKey = event.options.s3.secret;
+            const s3 = new AWS.S3({
+                region: event.options.s3.region,
+                accessKeyId: event.options.s3.key,
+                secretAccessKey: event.options.s3.secret,
+            });
 
             let type;
 
