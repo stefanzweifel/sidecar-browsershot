@@ -31,7 +31,7 @@ class BrowsershotLambda extends Browsershot
         $s3 = Arr::get($command, 'options.s3');
         $path = Arr::get($command, 'options.path');
 
-        if ($path && !$s3) {
+        if ($path && ! $s3) {
             file_put_contents($path, base64_decode($response->body()));
 
             return $path;
@@ -65,7 +65,7 @@ class BrowsershotLambda extends Browsershot
         $this->setOption('s3', [
             'path' => $targetPath,
             'region' => config('sidecar.region'),
-            'bucket' => config("filesystems.disks.$disk.bucket")
+            'bucket' => config("filesystems.disks.$disk.bucket"),
         ]);
 
         $extension = strtolower(pathinfo($targetPath, PATHINFO_EXTENSION));
