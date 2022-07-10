@@ -1,6 +1,7 @@
 const fs = require('fs');
-const {execSync} = require('child_process');
+const { execSync } = require('child_process');
 const chromium = require('chrome-aws-lambda');
+const AWS = require('aws-sdk');
 
 exports.handle = async function (event) {
     if (event.warming) {
@@ -47,7 +48,38 @@ exports.handle = async function (event) {
     // If there was a path, then read the file and return it.
     if (event.options.path) {
         let contents = fs.readFileSync(event.options.path);
+
         fs.unlinkSync(event.options.path);
+
+        // If the file destination is S3, then write
+        // the file and return the ETag as confimation.
+        if (event.options.s3) {
+            const s3 = new AWS.S3({ region: event.options.s3.region });
+
+            let type;
+
+            switch (event.options.type) {
+                case "png":
+                    type = 'image/png';
+                    break;
+                case "jpeg":
+                    type = 'image/jpeg';
+                    break;
+                default:
+                    type = 'application/pdf';
+            }
+
+            const params = {
+                Bucket: event.options.s3.bucket,
+                Key: event.options.s3.path,
+                Body: contents,
+                ContentType: type
+            }
+
+            const result = await s3.putObject(params).promise();
+
+            return result.ETag
+        }
 
         return new Buffer(contents).toString('base64');
     }
