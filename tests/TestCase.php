@@ -32,5 +32,12 @@ class TestCase extends Orchestra
         config()->set('sidecar.aws_region', env('SIDECAR_REGION'));
         config()->set('sidecar.aws_bucket', env('SIDECAR_ARTIFACT_BUCKET_NAME'));
         config()->set('sidecar.execution_role', env('SIDECAR_EXECUTION_ROLE'));
+
+        // Setup S3 bucket
+        config()->set('filesystems.disks.s3.driver', 's3');
+        config()->set('filesystems.disks.s3.key', env('SIDECAR_ACCESS_KEY_ID'));
+        config()->set('filesystems.disks.s3.secret', env('SIDECAR_SECRET_ACCESS_KEY'));
+        config()->set('filesystems.disks.s3.region', env('SIDECAR_REGION'));
+        config()->set('filesystems.disks.s3.bucket', env('SIDECAR_ARTIFACT_BUCKET_NAME'));
     }
 }
