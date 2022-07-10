@@ -78,7 +78,6 @@ it('stores screenshot on s3 bucket', function () {
     $this->assertTrue(Storage::disk('s3')->exists('example.jpg'));
     Storage::disk('s3')->delete('example.jpg');
     $this->assertFalse(Storage::disk('s3')->exists('example.jpg'));
-
 });
 
 it('stores pdf in s3 bucket', function () {
