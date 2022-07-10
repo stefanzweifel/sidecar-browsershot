@@ -52,6 +52,6 @@ exports.handle = async function (event) {
         return new Buffer(contents).toString('base64');
     }
 
-    // Otherwise return the string.
+    // Otherwise, return the string.
     return result.toString();
 };
