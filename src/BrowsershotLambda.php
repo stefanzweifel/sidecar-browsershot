@@ -60,7 +60,7 @@ class BrowsershotLambda extends Browsershot
     /**
      * @throws CouldNotTakeBrowsershot
      */
-    public function saveToS3(string $targetPath, string $disk = 's3')
+    public function saveToS3(string $targetPath, string $disk = 's3'): string
     {
         $this->setOption('s3', [
             'path' => $targetPath,
@@ -83,5 +83,7 @@ class BrowsershotLambda extends Browsershot
         if (empty($output)) {
             throw CouldNotTakeBrowsershot::chromeOutputEmpty("$targetPath on S3 disk: $disk", $output, $command);
         }
+
+        return $output;
     }
 }
