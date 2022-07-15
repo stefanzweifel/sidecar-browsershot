@@ -83,7 +83,9 @@ it('stores screenshot on s3 bucket', function () {
 it('stores pdf in s3 bucket', function () {
     $this->assertFalse(Storage::disk('s3')->exists('example.pdf'));
 
-    BrowsershotLambda::url('https://example.com')->saveToS3('example.pdf');
+    $etag = BrowsershotLambda::url('https://example.com')->saveToS3('example.pdf');
+
+    $this->assertIsString($etag);
 
     $this->assertTrue(Storage::disk('s3')->exists('example.pdf'));
     Storage::disk('s3')->delete('example.pdf');
