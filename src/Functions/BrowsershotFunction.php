@@ -75,6 +75,6 @@ class BrowsershotFunction extends LambdaFunction
         $region = config('sidecar.aws_region');
 
         // https://github.com/shelfio/chrome-aws-lambda-layer
-        return ["arn:aws:lambda:{$region}:764866452798:layer:chrome-aws-lambda:25"];
+        return ["arn:aws:lambda:{$region}:764866452798:layer:chrome-aws-lambda:31"];
     }
 }
