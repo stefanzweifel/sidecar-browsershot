@@ -17,7 +17,7 @@ on:
         type: string
 
 jobs:
-  example_job:
+  test:
     name: P${{ inputs.php_version }} - L${{ inputs.laravel_version }} - ${{ inputs.stability }}
     runs-on: ubuntu-latest
     steps:

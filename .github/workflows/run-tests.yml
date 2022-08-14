@@ -6,83 +6,68 @@ on:
   pull_request:
     branches: [main]
 
+
 jobs:
   php-8-laravel-8-lowest:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: ./.github/workflows/reusable-run-test.yml
-        with:
-          php_version: 8.0
-          laravel_version: 8.*
-          testbench_version: ^6.23
-          stability: prefer-lowest
+    uses: ./.github/workflows/reusable-run-test.yml
+    with:
+      php_version: 8.0
+      laravel_version: 8.*
+      testbench_version: ^6.23
+      stability: prefer-lowest
 
   php-8-laravel-8-stable:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: ./.github/workflows/reusable-run-test.yml
-        with:
-          php_version: 8.0
-          laravel_version: 8.*
-          testbench_version: ^6.23
-          stability: prefer-stable
+    uses: ./.github/workflows/reusable-run-test.yml
+    with:
+      php_version: 8.0
+      laravel_version: 8.*
+      testbench_version: ^6.23
+      stability: prefer-stable
 
   php-8-laravel-9-lowest:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: ./.github/workflows/reusable-run-test.yml
-        with:
-          php_version: 8.0
-          laravel_version: 9.*
-          testbench_version: ^7.0
-          stability: prefer-lowest
+    uses: ./.github/workflows/reusable-run-test.yml
+    with:
+      php_version: 8.0
+      laravel_version: 9.*
+      testbench_version: ^7.0
+      stability: prefer-lowest
 
   php-8-laravel-9-stable:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: ./.github/workflows/reusable-run-test.yml
-        with:
-          php_version: 8.0
-          laravel_version: 9.*
-          testbench_version: ^7.0
-          stability: prefer-stable
+    uses: ./.github/workflows/reusable-run-test.yml
+    with:
+      php_version: 8.0
+      laravel_version: 9.*
+      testbench_version: ^7.0
+      stability: prefer-stable
 
   php-81-laravel-8-lowest:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: ./.github/workflows/reusable-run-test.yml
-        with:
-          php_version: 8.1
-          laravel_version: 8.*
-          testbench_version: ^6.23
-          stability: prefer-lowest
+    uses: ./.github/workflows/reusable-run-test.yml
+    with:
+      php_version: 8.1
+      laravel_version: 8.*
+      testbench_version: ^6.23
+      stability: prefer-lowest
 
   php-81-laravel-8-stable:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: ./.github/workflows/reusable-run-test.yml
-        with:
-          php_version: 8.1
-          laravel_version: 8.*
-          testbench_version: ^6.23
-          stability: prefer-stable
+    uses: ./.github/workflows/reusable-run-test.yml
+    with:
+      php_version: 8.1
+      laravel_version: 8.*
+      testbench_version: ^6.23
+      stability: prefer-stable
 
   php-81-laravel-9-lowest:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: ./.github/workflows/reusable-run-test.yml
-        with:
-          php_version: 8.1
-          laravel_version: 9.*
-          testbench_version: ^7.0
-          stability: prefer-lowest
+    uses: ./.github/workflows/reusable-run-test.yml
+    with:
+      php_version: 8.1
+      laravel_version: 9.*
+      testbench_version: ^7.0
+      stability: prefer-lowest
 
   php-81-laravel-9-stable:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: ./.github/workflows/reusable-run-test.yml
-        with:
-          php_version: 8.1
-          laravel_version: 9.*
-          testbench_version: ^7.0
-          stability: prefer-stable
+    uses: ./.github/workflows/reusable-run-test.yml
+    with:
+      php_version: 8.1
+      laravel_version: 9.*
+      testbench_version: ^7.0
+      stability: prefer-stable
