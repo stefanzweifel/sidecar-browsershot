@@ -11,7 +11,7 @@ jobs:
     # concurrency: ci-${{ github.ref }}
     runs-on: ${{ matrix.os }}
     strategy:
-      # fail-fast: true
+      fail-fast: false
       max-parallel: 1
       matrix:
         os: [ubuntu-latest]
@@ -23,6 +23,10 @@ jobs:
             testbench: ^6.23
           - laravel: 9.*
             testbench: ^7.0
+        exclude:
+          - laravel: 8.*
+            php: 8.0
+            stability: prefer-lowest
 
     name: P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.stability }} - ${{ matrix.os }}
 
