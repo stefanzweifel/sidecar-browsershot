@@ -11,7 +11,7 @@ jobs:
     # concurrency: ci-${{ github.ref }}
     runs-on: ${{ matrix.os }}
     strategy:
-      fail-fast: true
+      # fail-fast: true
       max-parallel: 1
       matrix:
         os: [ubuntu-latest]
