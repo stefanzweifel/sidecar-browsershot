@@ -7,62 +7,82 @@ on:
     branches: [main]
 
 jobs:
-  test:
-    runs-on: ${{ matrix.os }}
-    strategy:
-      fail-fast: true
-      matrix:
-        os: [ubuntu-latest]
-        php: [8.0, 8.1]
-        laravel: [8.*, 9.*]
-        stability: [prefer-lowest, prefer-stable]
-        include:
-          - laravel: 8.*
-            testbench: ^6.23
-          - laravel: 9.*
-            testbench: ^7.0
-
-    name: P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.stability }} - ${{ matrix.os }}
-
+  php-8-laravel-8-lowest:
+    runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Setup PHP
-        uses: shivammathur/setup-php@v2
+      - uses: ./.github/workflows/reusable-run-test.yml
         with:
-          php-version: ${{ matrix.php }}
-          extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, bcmath, soap, intl, gd, exif, iconv, imagick, fileinfo
-          coverage: pcov
+          php_version: 8.0
+          laravel_version: 8.*
+          testbench_version: ^6.23
+          stability: prefer-lowest
 
-      - name: Install dependencies
-        run: |
-          composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" --no-interaction --no-update
-          composer update --${{ matrix.stability }} --prefer-dist --no-interaction
+  php-8-laravel-8-stable:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: ./.github/workflows/reusable-run-test.yml
+        with:
+          php_version: 8.0
+          laravel_version: 8.*
+          testbench_version: ^6.23
+          stability: prefer-stable
 
-        # Secrets used by vendor/bin/testbench have to be declared inside testbench.yaml. env() can't be used.
-      - name: Setup Testbench
-        run: |
-          echo "
-          providers:
-            - Hammerstone\Sidecar\Providers\SidecarServiceProvider
-            - Wnx\SidecarBrowsershot\SidecarBrowsershotServiceProvider" >> testbench.yaml
+  php-8-laravel-9-lowest:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: ./.github/workflows/reusable-run-test.yml
+        with:
+          php_version: 8.0
+          laravel_version: 9.*
+          testbench_version: ^7.0
+          stability: prefer-lowest
 
-        # Deploy Lambda function before running the test suite.
-      - name: Deploy Lambda function
-        run: vendor/bin/testbench sidecar-browsershot:setup --no-interaction -vvv
-        env:
-          SIDECAR_ACCESS_KEY_ID: ${{secrets.SIDECAR_ACCESS_KEY_ID}}
-          SIDECAR_SECRET_ACCESS_KEY: ${{secrets.SIDECAR_SECRET_ACCESS_KEY}}
-          SIDECAR_REGION: ${{secrets.SIDECAR_REGION}}
-          SIDECAR_ARTIFACT_BUCKET_NAME: ${{secrets.SIDECAR_ARTIFACT_BUCKET_NAME}}
-          SIDECAR_EXECUTION_ROLE: ${{secrets.SIDECAR_EXECUTION_ROLE}}
+  php-8-laravel-9-stable:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: ./.github/workflows/reusable-run-test.yml
+        with:
+          php_version: 8.0
+          laravel_version: 9.*
+          testbench_version: ^7.0
+          stability: prefer-stable
 
-      - name: Execute tests
-        run: vendor/bin/pest --coverage
-        env:
-          SIDECAR_ACCESS_KEY_ID: ${{secrets.SIDECAR_ACCESS_KEY_ID}}
-          SIDECAR_SECRET_ACCESS_KEY: ${{secrets.SIDECAR_SECRET_ACCESS_KEY}}
-          SIDECAR_REGION: ${{secrets.SIDECAR_REGION}}
-          SIDECAR_ARTIFACT_BUCKET_NAME: ${{secrets.SIDECAR_ARTIFACT_BUCKET_NAME}}
-          SIDECAR_EXECUTION_ROLE: ${{secrets.SIDECAR_EXECUTION_ROLE}}
+  php-81-laravel-8-lowest:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: ./.github/workflows/reusable-run-test.yml
+        with:
+          php_version: 8.1
+          laravel_version: 8.*
+          testbench_version: ^6.23
+          stability: prefer-lowest
+
+  php-81-laravel-8-stable:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: ./.github/workflows/reusable-run-test.yml
+        with:
+          php_version: 8.1
+          laravel_version: 8.*
+          testbench_version: ^6.23
+          stability: prefer-stable
+
+  php-81-laravel-9-lowest:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: ./.github/workflows/reusable-run-test.yml
+        with:
+          php_version: 8.1
+          laravel_version: 9.*
+          testbench_version: ^7.0
+          stability: prefer-lowest
+
+  php-81-laravel-9-stable:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: ./.github/workflows/reusable-run-test.yml
+        with:
+          php_version: 8.1
+          laravel_version: 9.*
+          testbench_version: ^7.0
+          stability: prefer-stable
