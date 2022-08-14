@@ -48,7 +48,7 @@ class BrowsershotFunction extends LambdaFunction
         $browser = str_replace('const puppet = (pup || require(\'puppeteer\'));', '', $browser);
 
         // Add ours.
-        return "const puppet = require('chrome-aws-lambda').puppeteer; \n" . $browser;
+        return "const puppet = require('@sparticuz/chrome-aws-lambda').puppeteer; \n" . $browser;
     }
 
     public function runtime()
