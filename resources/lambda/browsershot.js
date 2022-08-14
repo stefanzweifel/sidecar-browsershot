@@ -1,6 +1,6 @@
 const fs = require('fs');
 const { execSync } = require('child_process');
-const chromium = require('chrome-aws-lambda');
+const chromium = require('@sparticuz/chrome-aws-lambda');
 const AWS = require('aws-sdk');
 
 exports.handle = async function (event) {
