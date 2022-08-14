@@ -8,10 +8,11 @@ on:
 
 jobs:
   test:
-    concurrency: ci-${{ github.ref }}
+    # concurrency: ci-${{ github.ref }}
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: true
+      max-parallel: 1
       matrix:
         os: [ubuntu-latest]
         php: [8.0, 8.1]
