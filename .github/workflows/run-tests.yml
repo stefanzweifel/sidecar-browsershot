@@ -8,7 +8,6 @@ on:
 
 jobs:
   test:
-    # concurrency: ci-${{ github.ref }}
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
