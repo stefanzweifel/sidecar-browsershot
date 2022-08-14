@@ -1,0 +1,64 @@
+name: Run Tests
+
+on:
+  workflow_call:
+    inputs:
+      php_version:
+        required: true
+        type: string
+      laravel_version:
+        required: true
+        type: string
+      testbench_version:
+        required: true
+        type: string
+      stability:
+        required: true
+        type: string
+
+jobs:
+  example_job:
+    name: P${{ inputs.php_version }} - L${{ inputs.laravel_version }} - ${{ inputs.stability }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ inputs.php_version }}
+          extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, bcmath, soap, intl, gd, exif, iconv, imagick, fileinfo
+          coverage: pcov
+
+      - name: Install dependencies
+        run: |
+          composer require "laravel/framework:${{ inputs.laravel_version }}" "orchestra/testbench:${{ inputs.testbench_version }}" --no-interaction --no-update
+          composer update --${{ inputs.stability }} --prefer-dist --no-interaction
+
+        # Secrets used by vendor/bin/testbench have to be declared inside testbench.yaml. env() can't be used.
+      - name: Setup Testbench
+        run: |
+          echo "
+          providers:
+            - Hammerstone\Sidecar\Providers\SidecarServiceProvider
+            - Wnx\SidecarBrowsershot\SidecarBrowsershotServiceProvider" >> testbench.yaml
+
+        # Deploy Lambda function before running the test suite.
+      - name: Deploy Lambda function
+        run: vendor/bin/testbench sidecar-browsershot:setup --no-interaction -vvv
+        env:
+          SIDECAR_ACCESS_KEY_ID: ${{secrets.SIDECAR_ACCESS_KEY_ID}}
+          SIDECAR_SECRET_ACCESS_KEY: ${{secrets.SIDECAR_SECRET_ACCESS_KEY}}
+          SIDECAR_REGION: ${{secrets.SIDECAR_REGION}}
+          SIDECAR_ARTIFACT_BUCKET_NAME: ${{secrets.SIDECAR_ARTIFACT_BUCKET_NAME}}
+          SIDECAR_EXECUTION_ROLE: ${{secrets.SIDECAR_EXECUTION_ROLE}}
+
+      - name: Execute tests
+        run: vendor/bin/pest --coverage
+        env:
+          SIDECAR_ACCESS_KEY_ID: ${{secrets.SIDECAR_ACCESS_KEY_ID}}
+          SIDECAR_SECRET_ACCESS_KEY: ${{secrets.SIDECAR_SECRET_ACCESS_KEY}}
+          SIDECAR_REGION: ${{secrets.SIDECAR_REGION}}
+          SIDECAR_ARTIFACT_BUCKET_NAME: ${{secrets.SIDECAR_ARTIFACT_BUCKET_NAME}}
+          SIDECAR_EXECUTION_ROLE: ${{secrets.SIDECAR_EXECUTION_ROLE}}
