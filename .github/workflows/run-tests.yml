@@ -15,6 +15,12 @@ jobs:
       laravel_version: 8.*
       testbench_version: ^6.23
       stability: prefer-lowest
+    secrets:
+      SIDECAR_ACCESS_KEY_ID: ${{secrets.SIDECAR_ACCESS_KEY_ID}}
+      SIDECAR_SECRET_ACCESS_KEY: ${{secrets.SIDECAR_SECRET_ACCESS_KEY}}
+      SIDECAR_REGION: ${{secrets.SIDECAR_REGION}}
+      SIDECAR_ARTIFACT_BUCKET_NAME: ${{secrets.SIDECAR_ARTIFACT_BUCKET_NAME}}
+      SIDECAR_EXECUTION_ROLE: ${{secrets.SIDECAR_EXECUTION_ROLE}}
 
   php-8-laravel-8-stable:
     uses: ./.github/workflows/reusable-run-test.yml
@@ -23,6 +29,12 @@ jobs:
       laravel_version: 8.*
       testbench_version: ^6.23
       stability: prefer-stable
+    secrets:
+      SIDECAR_ACCESS_KEY_ID: ${{secrets.SIDECAR_ACCESS_KEY_ID}}
+      SIDECAR_SECRET_ACCESS_KEY: ${{secrets.SIDECAR_SECRET_ACCESS_KEY}}
+      SIDECAR_REGION: ${{secrets.SIDECAR_REGION}}
+      SIDECAR_ARTIFACT_BUCKET_NAME: ${{secrets.SIDECAR_ARTIFACT_BUCKET_NAME}}
+      SIDECAR_EXECUTION_ROLE: ${{secrets.SIDECAR_EXECUTION_ROLE}}
 
   php-8-laravel-9-lowest:
     uses: ./.github/workflows/reusable-run-test.yml
@@ -31,6 +43,12 @@ jobs:
       laravel_version: 9.*
       testbench_version: ^7.0
       stability: prefer-lowest
+    secrets:
+      SIDECAR_ACCESS_KEY_ID: ${{secrets.SIDECAR_ACCESS_KEY_ID}}
+      SIDECAR_SECRET_ACCESS_KEY: ${{secrets.SIDECAR_SECRET_ACCESS_KEY}}
+      SIDECAR_REGION: ${{secrets.SIDECAR_REGION}}
+      SIDECAR_ARTIFACT_BUCKET_NAME: ${{secrets.SIDECAR_ARTIFACT_BUCKET_NAME}}
+      SIDECAR_EXECUTION_ROLE: ${{secrets.SIDECAR_EXECUTION_ROLE}}
 
   php-8-laravel-9-stable:
     uses: ./.github/workflows/reusable-run-test.yml
@@ -39,6 +57,12 @@ jobs:
       laravel_version: 9.*
       testbench_version: ^7.0
       stability: prefer-stable
+    secrets:
+      SIDECAR_ACCESS_KEY_ID: ${{secrets.SIDECAR_ACCESS_KEY_ID}}
+      SIDECAR_SECRET_ACCESS_KEY: ${{secrets.SIDECAR_SECRET_ACCESS_KEY}}
+      SIDECAR_REGION: ${{secrets.SIDECAR_REGION}}
+      SIDECAR_ARTIFACT_BUCKET_NAME: ${{secrets.SIDECAR_ARTIFACT_BUCKET_NAME}}
+      SIDECAR_EXECUTION_ROLE: ${{secrets.SIDECAR_EXECUTION_ROLE}}
 
   php-81-laravel-8-lowest:
     uses: ./.github/workflows/reusable-run-test.yml
@@ -47,6 +71,12 @@ jobs:
       laravel_version: 8.*
       testbench_version: ^6.23
       stability: prefer-lowest
+    secrets:
+      SIDECAR_ACCESS_KEY_ID: ${{secrets.SIDECAR_ACCESS_KEY_ID}}
+      SIDECAR_SECRET_ACCESS_KEY: ${{secrets.SIDECAR_SECRET_ACCESS_KEY}}
+      SIDECAR_REGION: ${{secrets.SIDECAR_REGION}}
+      SIDECAR_ARTIFACT_BUCKET_NAME: ${{secrets.SIDECAR_ARTIFACT_BUCKET_NAME}}
+      SIDECAR_EXECUTION_ROLE: ${{secrets.SIDECAR_EXECUTION_ROLE}}
 
   php-81-laravel-8-stable:
     uses: ./.github/workflows/reusable-run-test.yml
@@ -55,6 +85,12 @@ jobs:
       laravel_version: 8.*
       testbench_version: ^6.23
       stability: prefer-stable
+    secrets:
+      SIDECAR_ACCESS_KEY_ID: ${{secrets.SIDECAR_ACCESS_KEY_ID}}
+      SIDECAR_SECRET_ACCESS_KEY: ${{secrets.SIDECAR_SECRET_ACCESS_KEY}}
+      SIDECAR_REGION: ${{secrets.SIDECAR_REGION}}
+      SIDECAR_ARTIFACT_BUCKET_NAME: ${{secrets.SIDECAR_ARTIFACT_BUCKET_NAME}}
+      SIDECAR_EXECUTION_ROLE: ${{secrets.SIDECAR_EXECUTION_ROLE}}
 
   php-81-laravel-9-lowest:
     uses: ./.github/workflows/reusable-run-test.yml
@@ -63,6 +99,12 @@ jobs:
       laravel_version: 9.*
       testbench_version: ^7.0
       stability: prefer-lowest
+    secrets:
+      SIDECAR_ACCESS_KEY_ID: ${{secrets.SIDECAR_ACCESS_KEY_ID}}
+      SIDECAR_SECRET_ACCESS_KEY: ${{secrets.SIDECAR_SECRET_ACCESS_KEY}}
+      SIDECAR_REGION: ${{secrets.SIDECAR_REGION}}
+      SIDECAR_ARTIFACT_BUCKET_NAME: ${{secrets.SIDECAR_ARTIFACT_BUCKET_NAME}}
+      SIDECAR_EXECUTION_ROLE: ${{secrets.SIDECAR_EXECUTION_ROLE}}
 
   php-81-laravel-9-stable:
     uses: ./.github/workflows/reusable-run-test.yml
@@ -71,3 +113,9 @@ jobs:
       laravel_version: 9.*
       testbench_version: ^7.0
       stability: prefer-stable
+    secrets:
+      SIDECAR_ACCESS_KEY_ID: ${{secrets.SIDECAR_ACCESS_KEY_ID}}
+      SIDECAR_SECRET_ACCESS_KEY: ${{secrets.SIDECAR_SECRET_ACCESS_KEY}}
+      SIDECAR_REGION: ${{secrets.SIDECAR_REGION}}
+      SIDECAR_ARTIFACT_BUCKET_NAME: ${{secrets.SIDECAR_ARTIFACT_BUCKET_NAME}}
+      SIDECAR_EXECUTION_ROLE: ${{secrets.SIDECAR_EXECUTION_ROLE}}

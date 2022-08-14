@@ -15,6 +15,18 @@ on:
       stability:
         required: true
         type: string
+    secrets:
+      SIDECAR_ACCESS_KEY_ID:
+        required: true
+      SIDECAR_SECRET_ACCESS_KEY:
+        required: true
+      SIDECAR_REGION:
+        required: true
+      SIDECAR_ARTIFACT_BUCKET_NAME:
+        required: true
+      SIDECAR_EXECUTION_ROLE:
+        required: true
+
 
 jobs:
   test:
