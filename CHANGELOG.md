@@ -5,7 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-## [Unreleased](https://github.com/stefanzweifel/sidecar-browsershot/compare/v1.2.1...HEAD)
+## [Unreleased](https://github.com/stefanzweifel/sidecar-browsershot/compare/v1.3.0...HEAD)
+
+## [v1.3.0](https://github.com/stefanzweifel/sidecar-browsershot/compare/v1.2.1...v1.3.0) - 2022-08-15
+
+### Changed
+
+- Update to Chrome Layer v31 (Supports Node.js 16. Uses Chromium v103) ([#27](https://github.com/stefanzweifel/sidecar-browsershot/pull/27))
+- Use GitHub Actions max-parallel setting to run tests ([#29](https://github.com/stefanzweifel/sidecar-browsershot/pull/29))
 
 ## [v1.2.1](https://github.com/stefanzweifel/sidecar-browsershot/compare/v1.2.0...v1.2.1) - 2022-07-15
 
