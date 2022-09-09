@@ -52,7 +52,7 @@ exports.handle = async function (event) {
         fs.unlinkSync(event.options.path);
 
         // If the file destination is S3, then write
-        // the file and return the ETag as confimation.
+        // the file and return the ETag as confirmation.
         if (event.options.s3) {
             const accessKeyId = event.options.s3.key;
             const secretAccessKey = event.options.s3.secret;
