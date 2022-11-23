@@ -86,4 +86,11 @@ class BrowsershotLambda extends Browsershot
 
         return $output;
     }
+
+    public function base64pdf(): string
+    {
+        $command = $this->createPdfCommand();
+
+        return rtrim($this->callBrowser($command));
+    }
 }
