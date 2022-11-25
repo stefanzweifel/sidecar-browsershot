@@ -96,3 +96,12 @@ test('it throws CouldNotTakeBrowsershot Exception if no file extension is passed
     BrowsershotLambda::html('<h1>Hello world!!</h1>')
         ->saveToS3('example');
 })->expectException(CouldNotTakeBrowsershot::class);
+
+it('returns a trimed base64pdf', function () {
+    $base64 = BrowsershotLambda::html('<h1>Hello world!!</h1>')
+        ->base64pdf();
+
+    $decode = base64_decode($base64);
+
+    $this->assertEquals($base64, base64_encode($decode));
+});
