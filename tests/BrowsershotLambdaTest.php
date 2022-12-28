@@ -31,7 +31,7 @@ it('generates screenshot from url', function () {
 
 it('generates screenshot from html', function () {
     $this->assertFileDoesNotExist('example.jpg');
-    BrowsershotLambda::html('<h1>Hello world!!</h1>')->save('example.jpg');
+    BrowsershotLambda::html('<h1>Hello world!! 👋🦫🫠</h1>')->save('example.jpg');
     $this->assertFileExists('example.jpg');
 });
 
@@ -68,7 +68,6 @@ it('throws LambdaExecutionException error if browsershot fails', function () {
         ->select('#does-not-exist')
         ->bodyHtml();
 })->expectException(LambdaExecutionException::class);
-
 
 it('stores screenshot on s3 bucket', function () {
     $this->assertFalse(Storage::disk('s3')->exists('example.jpg'));
