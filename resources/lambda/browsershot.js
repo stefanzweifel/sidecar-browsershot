@@ -8,6 +8,9 @@ exports.handle = async function (event) {
         return;
     }
 
+    // Add Emoji Font to Chromium
+    await chromium.font('https://raw.githack.com/googlei18n/noto-emoji/master/fonts/NotoColorEmoji.ttf');
+
     // Constant file where we write out options.
     const options = '/tmp/browsershot.js';
 
