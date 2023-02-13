@@ -64,7 +64,7 @@ class BrowsershotLambda extends Browsershot
     {
         $this->setOption('s3', [
             'path' => $targetPath,
-            'region' => config('sidecar.region'),
+            'region' => config('sidecar.aws_region'),
             'bucket' => config("filesystems.disks.$disk.bucket"),
         ]);
 
