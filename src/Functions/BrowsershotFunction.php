@@ -27,6 +27,7 @@ class BrowsershotFunction extends LambdaFunction
             ])
             ->includeExactly([
                 __DIR__ . '/../../resources/lambda/browsershot.js' => 'browsershot.js',
+                __DIR__ . '/../../resources/lambda/NotoColorEmoji.ttf' => 'NotoColorEmoji.ttf',
             ]);
     }
 
