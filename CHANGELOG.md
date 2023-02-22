@@ -5,7 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-## [Unreleased](https://github.com/stefanzweifel/sidecar-browsershot/compare/v1.6.1...HEAD)
+## [Unreleased](https://github.com/stefanzweifel/sidecar-browsershot/compare/v1.6.2...HEAD)
+
+## [v1.6.2](https://github.com/stefanzweifel/sidecar-browsershot/compare/v1.6.1...v1.6.2) - 2023-02-22
+
+### What's Changed
+
+- Include emoji font in lambda bundle ([#51](https://github.com/stefanzweifel/sidecar-browsershot/pull/51))
 
 ## [v1.6.1](https://github.com/stefanzweifel/sidecar-browsershot/compare/v1.6.0...v1.6.1) - 2023-02-14
 
