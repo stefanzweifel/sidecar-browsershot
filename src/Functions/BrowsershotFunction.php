@@ -6,7 +6,6 @@ use Hammerstone\Sidecar\LambdaFunction;
 use Hammerstone\Sidecar\Package;
 use Hammerstone\Sidecar\Runtime;
 use Hammerstone\Sidecar\WarmingConfig;
-use Illuminate\Support\Facades\Storage;
 
 class BrowsershotFunction extends LambdaFunction
 {
