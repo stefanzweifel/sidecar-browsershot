@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [v1.6.2](https://github.com/stefanzweifel/sidecar-browsershot/compare/v1.6.1...v1.6.2) - 2023-02-22
 
-### What's Changed
+### Changed
 
 - Include emoji font in lambda bundle ([#51](https://github.com/stefanzweifel/sidecar-browsershot/pull/51))
 
