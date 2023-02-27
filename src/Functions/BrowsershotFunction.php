@@ -78,14 +78,4 @@ class BrowsershotFunction extends LambdaFunction
         // https://github.com/shelfio/chrome-aws-lambda-layer
         return ["arn:aws:lambda:{$region}:764866452798:layer:chrome-aws-lambda:31"];
     }
-
-    public function beforeDeployment()
-    {
-        // Download NotoColorEmoji font to support rendering emojis in Browsershot.
-        // A fresh font file is downloaded, when the font file is not present.
-        if (! file_exists(__DIR__ . '/../../resources/lambda/NotoColorEmoji.ttf')) {
-            $font = file_get_contents('https://raw.githubusercontent.com/googlefonts/noto-emoji/main/fonts/NotoColorEmoji.ttf');
-            file_put_contents(__DIR__ . '/../../resources/lambda/NotoColorEmoji.ttf', $font);
-        }
-    }
 }
