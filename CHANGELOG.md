@@ -5,7 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-## [Unreleased](https://github.com/stefanzweifel/sidecar-browsershot/compare/v1.6.2...HEAD)
+## [Unreleased](https://github.com/stefanzweifel/sidecar-browsershot/compare/v1.6.3...HEAD)
+
+## [v1.6.3](https://github.com/stefanzweifel/sidecar-browsershot/compare/v1.6.2...v1.6.3) - 2023-02-27
+
+### Changed
+
+- Cleanup puppeteer_dev_chrome_profile folders in tmp after running Puppeteer  ([#54](https://github.com/stefanzweifel/sidecar-browsershot/pull/54))
+
+### Fixed
+
+- Store Emoji Font in package ([#56](https://github.com/stefanzweifel/sidecar-browsershot/pull/56))
 
 ## [v1.6.2](https://github.com/stefanzweifel/sidecar-browsershot/compare/v1.6.1...v1.6.2) - 2023-02-22
 
