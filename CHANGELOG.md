@@ -5,7 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-## [Unreleased](https://github.com/stefanzweifel/sidecar-browsershot/compare/v1.6.3...HEAD)
+## [Unreleased](https://github.com/stefanzweifel/sidecar-browsershot/compare/v1.6.4...HEAD)
+
+## [v1.6.4](https://github.com/stefanzweifel/sidecar-browsershot/compare/v1.6.3...v1.6.4) - 2023-03-02
+
+### Changed
+
+- Add Support for Sidecar v0.4.0 ([#58](https://github.com/stefanzweifel/sidecar-browsershot/pull/58))
 
 ## [v1.6.3](https://github.com/stefanzweifel/sidecar-browsershot/compare/v1.6.2...v1.6.3) - 2023-02-27
 
