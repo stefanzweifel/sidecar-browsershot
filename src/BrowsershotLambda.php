@@ -88,14 +88,9 @@ class BrowsershotLambda extends Browsershot
     }
 
     /**
-     * Load the html from a file that is stored in S3.
-     *
-     * @param string $sourcePath
-     * @param string $disk
-     *
-     * @return static
+     * Tell BrowsershotLambda to load HTML from a file that is stored in S3.
      */
-    public static function htmlFromS3File(string $sourcePath, string $disk = 's3'): self
+    public static function readHtmlFromS3(string $sourcePath, string $disk = 's3'): self
     {
         return (new static())
             ->setOption('s3Source', [
