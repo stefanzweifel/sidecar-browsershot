@@ -87,6 +87,24 @@ class BrowsershotLambda extends Browsershot
         return $output;
     }
 
+    /**
+     * Load the html from a file that is stored in S3.
+     *
+     * @param string $sourcePath
+     * @param string $disk
+     *
+     * @return static
+     */
+    public static function htmlFromS3File(string $sourcePath, string $disk = 's3'): self
+    {
+        return (new static())
+            ->setOption('s3Source', [
+                'path' => $sourcePath,
+                'region' => config('sidecar.aws_region'),
+                'bucket' => config("filesystems.disks.$disk.bucket"),
+            ]);
+    }
+
     public function base64pdf(): string
     {
         $command = $this->createPdfCommand();

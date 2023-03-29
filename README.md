@@ -82,6 +82,21 @@ SIDECAR_BROWSERSHOT_WARMING_INSTANCES=5
 
 Alternatively you can publish the `sidecar-browsershot.php` config file and change the `warming` setting yourself.
 
+## Reading source from S3
+
+You can store a HTML file on AWS S3 and pass the path to Lambda for it to create the PDF or image from. 
+This is necessary for large source files in order to avoid restrictions on the size of Lambda requests.
+
+```php
+use Wnx\SidecarBrowsershot\BrowsershotLambda;
+
+// Use a HTML file from S3 to generate a PDF
+BrowsershotLambda::htmlFromS3File('html/example.html')->save('example.pdf');
+
+// You can also pass a disk name if required (default: 's3')
+BrowsershotLambda::htmlFromS3File('html/example.html', 's3files')->save('example.pdf');
+```
+
 ## Saving directly to S3
 
 You can store your file directly on AWS S3 if you want to keep it there, or to avoid the size limit on Lambda responses.

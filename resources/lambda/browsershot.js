@@ -28,6 +28,24 @@ exports.handle = async function (event) {
     if (event._html) {
         fs.writeFileSync('/tmp/index.html', event._html);
         event.url = 'file:///tmp/index.html';
+    } else if (event.options.s3Source) {
+        // If the source is S3, then download the file into a temporary file to be used as the URL.
+        const s3 = new AWS.S3({
+            region: event.options.s3Source.region,
+            accessKeyId: event.options.s3Source.key,
+            secretAccessKey: event.options.s3Source.secret,
+        });
+
+        const params = {
+            Bucket: event.options.s3Source.bucket,
+            Key: event.options.s3Source.path,
+        }
+
+        const result = await s3.getObject(params).promise();
+
+        fs.writeFileSync('/tmp/index.html', result.Body);
+
+        event.url = 'file:///tmp/index.html';
     }
 
     // Get the executable path from the chrome layer.

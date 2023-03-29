@@ -104,3 +104,13 @@ it('returns a trimed base64pdf', function () {
 
     $this->assertEquals($base64, base64_encode($decode));
 });
+
+it('reads a file from an s3 bucket', function () {
+    // Create test file in s3 bucket
+    Storage::disk('s3')->put('example.html', '<h1>Hello world!!</h1>');
+    $this->assertTrue(Storage::disk('s3')->exists('example.html'));
+
+    BrowsershotLambda::htmlFromS3File('example.html')->save('example.pdf');
+
+    $this->assertFileExists('example.pdf');
+});
