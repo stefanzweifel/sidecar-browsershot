@@ -4,7 +4,6 @@ namespace Wnx\SidecarBrowsershot\Commands;
 
 use Hammerstone\Sidecar\Commands\Deploy;
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\Artisan;
 use Wnx\SidecarBrowsershot\Functions\BrowsershotFunction;
 
 class InternalBrowsershotSetupCommand extends Command
@@ -46,6 +45,7 @@ class InternalBrowsershotSetupCommand extends Command
 
         if ($exitCode !== self::SUCCESS) {
             $this->error('Deploy command failed');
+
             return self::FAILURE;
         }
 
