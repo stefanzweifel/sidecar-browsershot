@@ -39,10 +39,15 @@ class InternalBrowsershotSetupCommand extends Command
 
         $this->info('Deploy function …');
 
-        Artisan::call(Deploy::class, [
+        $exitCode = $this->call(Deploy::class, [
             '--activate' => true,
             '--env' => 'testing',
         ]);
+
+        if ($exitCode !== self::SUCCESS) {
+            $this->error('Deploy command failed');
+            return self::FAILURE;
+        }
 
         $this->comment('All done');
 
