@@ -62,6 +62,15 @@ class BrowsershotFunction extends LambdaFunction
         return config('sidecar-browsershot.memory');
     }
 
+    /**
+     * @inheritDoc
+     */
+    public function storage()
+    {
+        // Default to the main sidecar config value if the sidecar-browsershot config hasn't been updated to include this new key.
+        return config('sidecar-browsershot.storage', parent::storage());
+    }
+
     public function warmingConfig()
     {
         return WarmingConfig::instances(config('sidecar-browsershot.warming'));

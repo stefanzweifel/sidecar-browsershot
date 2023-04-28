@@ -10,6 +10,12 @@ return [
     'memory' => env('SIDECAR_BROWSERSHOT_MEMORY', 2048),
 
     /**
+     * The default ephemeral storage available to SidecarBrowsershot, in megabytes. (Defaults to 512MB)
+     * @see https://hammerstone.dev/sidecar/docs/main/functions/customization#storage
+     */
+    'storage' => env('SIDECAR_BROWSERSHOT_STORAGE', 512),
+
+    /**
      * Define the number of warming instances to boot.
      * @see https://hammerstone.dev/sidecar/docs/main/functions/warming
      */
