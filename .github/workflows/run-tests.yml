@@ -17,6 +17,7 @@ jobs:
         php: [8.0, 8.1, 8.2]
         laravel: [8.*, 9.*, 10.*]
         stability: [prefer-lowest, prefer-stable]
+        architecture: ['x86_64', 'arm64']
         include:
           - laravel: 8.*
             testbench: ^6.23
@@ -69,6 +70,7 @@ jobs:
           SIDECAR_REGION: ${{secrets.SIDECAR_REGION}}
           SIDECAR_ARTIFACT_BUCKET_NAME: ${{secrets.SIDECAR_ARTIFACT_BUCKET_NAME}}
           SIDECAR_EXECUTION_ROLE: ${{secrets.SIDECAR_EXECUTION_ROLE}}
+          SIDECAR_ARCH: ${{ matrix.architecture }}
 
       - name: Execute tests
         run: vendor/bin/pest --coverage
@@ -78,3 +80,4 @@ jobs:
           SIDECAR_REGION: ${{secrets.SIDECAR_REGION}}
           SIDECAR_ARTIFACT_BUCKET_NAME: ${{secrets.SIDECAR_ARTIFACT_BUCKET_NAME}}
           SIDECAR_EXECUTION_ROLE: ${{secrets.SIDECAR_EXECUTION_ROLE}}
+          SIDECAR_ARCH: ${{ matrix.architecture }}
