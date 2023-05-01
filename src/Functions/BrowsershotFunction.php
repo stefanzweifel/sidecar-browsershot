@@ -2,6 +2,7 @@
 
 namespace Wnx\SidecarBrowsershot\Functions;
 
+use Hammerstone\Sidecar\Architecture;
 use Hammerstone\Sidecar\LambdaFunction;
 use Hammerstone\Sidecar\Package;
 use Hammerstone\Sidecar\Runtime;
@@ -69,6 +70,14 @@ class BrowsershotFunction extends LambdaFunction
     {
         // Default to the main sidecar config value if the sidecar-browsershot config hasn't been updated to include this new key.
         return config('sidecar-browsershot.storage', parent::storage());
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function architecture()
+    {
+        return Architecture::X86_64;
     }
 
     public function warmingConfig()
