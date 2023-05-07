@@ -46,6 +46,7 @@ jobs:
           php-version: ${{ matrix.php }}
           extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, bcmath, soap, intl, gd, exif, iconv, imagick, fileinfo
           coverage: pcov
+          ini-values: pcov.directory=src
 
       - name: Install dependencies
         run: |
