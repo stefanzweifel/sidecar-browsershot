@@ -3,6 +3,8 @@
 use Hammerstone\Sidecar\Exceptions\LambdaExecutionException;
 use Illuminate\Support\Facades\Storage;
 use Spatie\Browsershot\Exceptions\CouldNotTakeBrowsershot;
+use Spatie\Image\Image;
+use Spatie\Image\Manipulations;
 use Wnx\SidecarBrowsershot\BrowsershotLambda;
 
 beforeEach(function () {
@@ -113,4 +115,41 @@ it('reads a file from an s3 bucket', function () {
     BrowsershotLambda::readHtmlFromS3('example.html')->save('example.pdf');
 
     $this->assertFileExists('example.pdf');
+});
+
+it('applies image manipulations when calling save method', function () {
+    $this->assertFileDoesNotExist('example.jpg');
+
+    BrowsershotLambda::url('https://example.com')
+        ->windowSize(1920, 1080)
+        ->fit(Manipulations::FIT_CONTAIN, 200, 200)
+        ->save('example.jpg');
+
+    $image = new Image('example.jpg');
+    $this->assertEquals(200, $image->getWidth());
+});
+
+it('applies image manipulations when calling saveToS3 method', function () {
+    $this->assertFalse(Storage::disk('s3')->exists('example.jpg'));
+
+    // Create screenshot from example.com and resize it to 200x200
+    BrowsershotLambda::url('https://example.com')
+        ->windowSize(1920, 1080)
+        ->fit(Manipulations::FIT_CONTAIN, 200, 200)
+        ->saveToS3('example.jpg');
+
+    $this->assertTrue(Storage::disk('s3')->exists('example.jpg'));
+
+    // Download file from s3 bucket to local disc
+    Storage::disk('local')->put('example.jpg', Storage::disk('s3')->get('example.jpg'));
+    $path = Storage::disk('local')->path('example.jpg');
+
+    // Check image dimensions of local copy.
+    $image = new Image($path);
+    $this->assertEquals(200, $image->getWidth());
+
+    // Delete file from S3 and local disc
+    Storage::disk('local')->delete('example.jpg');
+    Storage::disk('s3')->delete('example.jpg');
+    $this->assertFalse(Storage::disk('s3')->exists('example.jpg'));
 });
