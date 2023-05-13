@@ -118,7 +118,7 @@ it('reads a file from an s3 bucket', function () {
 });
 
 it('applies image manipulations when calling save method', function () {
-     $this->assertFileDoesNotExist('example.jpg');
+    $this->assertFileDoesNotExist('example.jpg');
 
     BrowsershotLambda::url('https://example.com')
         ->windowSize(1920, 1080)
