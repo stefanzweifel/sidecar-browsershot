@@ -3,6 +3,8 @@
 use Hammerstone\Sidecar\Exceptions\LambdaExecutionException;
 use Illuminate\Support\Facades\Storage;
 use Spatie\Browsershot\Exceptions\CouldNotTakeBrowsershot;
+use Spatie\Image\Image;
+use Spatie\Image\Manipulations;
 use Wnx\SidecarBrowsershot\BrowsershotLambda;
 
 beforeEach(function () {
@@ -114,3 +116,16 @@ it('reads a file from an s3 bucket', function () {
 
     $this->assertFileExists('example.pdf');
 });
+
+it('applies image manipulations when calling save method', function () {
+     $this->assertFileDoesNotExist('example.jpg');
+
+    BrowsershotLambda::url('https://example.com')
+        ->windowSize(1920, 1080)
+        ->fit(Manipulations::FIT_CONTAIN, 200, 200)
+        ->save('example.jpg');
+
+    $image = new Image('example.jpg');
+    $this->assertEquals(200, $image->getWidth());
+});
+
