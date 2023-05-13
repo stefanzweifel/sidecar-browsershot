@@ -4,10 +4,12 @@ namespace Wnx\SidecarBrowsershot;
 
 use Hammerstone\Sidecar\Results\SettledResult;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Spatie\Browsershot\Browsershot;
 use Spatie\Browsershot\Exceptions\CouldNotTakeBrowsershot;
 use Spatie\Browsershot\Exceptions\ElementNotFound;
+use Spatie\Image\Image;
 use Wnx\SidecarBrowsershot\Functions\BrowsershotFunction;
 
 class BrowsershotLambda extends Browsershot
@@ -84,7 +86,25 @@ class BrowsershotLambda extends Browsershot
             throw CouldNotTakeBrowsershot::chromeOutputEmpty("$targetPath on S3 disk: $disk", $output, $command);
         }
 
+        if (! $this->imageManipulations->isEmpty()) {
+            $this->applyManipulationsOnS3($targetPath, $disk);
+        }
+
         return $output;
+    }
+
+    public function applyManipulationsOnS3(string $imagePath, string $disk = 's3'): void
+    {
+        // Download the image from S3 to a temporary file and apply the manipulations.
+        Storage::disk('local')->put($imagePath, Storage::disk($disk)->get($imagePath));
+
+        $localPath = Storage::disk('local')->path($imagePath);
+
+        $this->applyManipulations($localPath);
+
+        // Upload the manipulated image back to S3 and delete the temporary file.
+        Storage::disk($disk)->put($imagePath, Storage::disk('local')->get($imagePath));
+        Storage::disk('local')->delete($imagePath);
     }
 
     /**
