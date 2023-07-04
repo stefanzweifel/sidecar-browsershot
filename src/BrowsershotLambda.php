@@ -9,7 +9,6 @@ use Illuminate\Support\Str;
 use Spatie\Browsershot\Browsershot;
 use Spatie\Browsershot\Exceptions\CouldNotTakeBrowsershot;
 use Spatie\Browsershot\Exceptions\ElementNotFound;
-use Spatie\Image\Image;
 use Wnx\SidecarBrowsershot\Functions\BrowsershotFunction;
 
 class BrowsershotLambda extends Browsershot
