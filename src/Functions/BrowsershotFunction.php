@@ -24,7 +24,7 @@ class BrowsershotFunction extends LambdaFunction
     {
         return Package::make()
             ->includeStrings([
-                'browser.js' => $this->modifiedBrowserJs(),
+                'browser.cjs' => $this->modifiedBrowserJs(),
             ])
             ->includeExactly([
                 __DIR__ . '/../../resources/lambda/browsershot.js' => 'browsershot.js',
@@ -34,16 +34,16 @@ class BrowsershotFunction extends LambdaFunction
 
     /**
      * We get puppeteer out of the layer, which spatie doesn't allow
-     * for. We'll just overwrite their browser.js to add it.
+     * for. We'll just overwrite their browser.cjs to add it.
      *
      * @return string
      */
     protected function modifiedBrowserJs()
     {
         if (app()->environment('testing')) {
-            $browser = file_get_contents('vendor/spatie/browsershot/bin/browser.js');
+            $browser = file_get_contents('vendor/spatie/browsershot/bin/browser.cjs');
         } else {
-            $browser = file_get_contents(base_path('vendor/spatie/browsershot/bin/browser.js'));
+            $browser = file_get_contents(base_path('vendor/spatie/browsershot/bin/browser.cjs'));
         }
 
         // Remove their reference.

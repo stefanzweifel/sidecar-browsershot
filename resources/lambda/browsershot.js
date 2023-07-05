@@ -61,7 +61,7 @@ exports.handle = async function (event) {
     fs.writeFileSync(options, JSON.stringify(event));
 
     // Exec spatie's browser command.
-    let result = execSync(`node ./browser.js '-f file://${options}'`, {
+    let result = execSync(`node ./browser.cjs '-f file://${options}'`, {
         // Set maxBuffer to 100 MB
         maxBuffer: 1024 * 1024 * 100
     });
