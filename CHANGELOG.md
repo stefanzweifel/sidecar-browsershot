@@ -5,7 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-## [Unreleased](https://github.com/stefanzweifel/sidecar-browsershot/compare/v1.9.0...HEAD)
+## [Unreleased](https://github.com/stefanzweifel/sidecar-browsershot/compare/v1.9.1...HEAD)
+
+## [v1.9.1](https://github.com/stefanzweifel/sidecar-browsershot/compare/v1.9.0...v1.9.1) - 2023-07-05
+
+### Changed
+
+- Raise minumum required spatie/browsershot version to v3.57.8.
+
+### Fixed
+
+- Fix for renamed browser.js file in browsershot 3.57.8 ([#78](https://github.com/stefanzweifel/sidecar-browsershot/pull/78))
 
 ## [v1.9.0](https://github.com/stefanzweifel/sidecar-browsershot/compare/v1.8.1...v1.9.0) - 2023-05-13
 
