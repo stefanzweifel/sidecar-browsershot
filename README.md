@@ -1,8 +1,8 @@
 # Run Browsershot on AWS Lambda with Sidecar for Laravel
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/wnx/sidecar-browsershot.svg?style=flat-square)](https://packagist.org/packages/wnx/sidecar-browsershot)
-[![GitHub Tests Action Status](https://img.shields.io/github/workflow/status/stefanzweifel/sidecar-browsershot/run-tests?label=tests)](https://github.com/stefanzweifel/sidecar-browsershot/actions?query=workflow%3Arun-tests+branch%3Amain)
-[![GitHub Code Style Action Status](https://img.shields.io/github/workflow/status/stefanzweifel/sidecar-browsershot/Check%20&%20fix%20styling?label=code%20style)](https://github.com/stefanzweifel/sidecar-browsershot/actions?query=workflow%3A"Check+%26+fix+styling"+branch%3Amain)
+[![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/stefanzweifel/sidecar-browsershot/run-tests.yml?label=tests&style=flat-square)](https://github.com/stefanzweifel/sidecar-browsershot/actions?query=workflow%3Arun-tests+branch%3Amain)
+[![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/stefanzweifel/sidecar-browsershot/php-cs-fixer.yml?label=code%20style&style=flat-square)](https://github.com/stefanzweifel/sidecar-browsershot/actions?query=workflow%3A"Check+%26+fix+styling"+branch%3Amain)
 [![Total Downloads](https://img.shields.io/packagist/dt/wnx/sidecar-browsershot.svg?style=flat-square)](https://packagist.org/packages/wnx/sidecar-browsershot)
 
 This package allows you to run [Browsershot](https://github.com/spatie/browsershot) on [AWS Lambda](https://aws.amazon.com/lambda/) through [Sidecar](https://github.com/hammerstonedev/sidecar).
