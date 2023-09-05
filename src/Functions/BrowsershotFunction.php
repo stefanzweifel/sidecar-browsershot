@@ -55,7 +55,7 @@ class BrowsershotFunction extends LambdaFunction
 
     public function runtime()
     {
-        return Runtime::NODEJS_14;
+        return Runtime::NODEJS_16;
     }
 
     public function memory()
