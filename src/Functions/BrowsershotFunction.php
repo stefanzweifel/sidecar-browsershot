@@ -5,7 +5,6 @@ namespace Wnx\SidecarBrowsershot\Functions;
 use Hammerstone\Sidecar\Architecture;
 use Hammerstone\Sidecar\LambdaFunction;
 use Hammerstone\Sidecar\Package;
-use Hammerstone\Sidecar\Runtime;
 use Hammerstone\Sidecar\WarmingConfig;
 
 class BrowsershotFunction extends LambdaFunction
@@ -25,7 +24,7 @@ class BrowsershotFunction extends LambdaFunction
         return Package::make()
             ->setBasePath(__DIR__ . '/../..')
             ->include([
-                'node_modules/'
+                'node_modules/',
             ])
             ->includeStrings([
                 'browser.cjs' => $this->modifiedBrowserJs(),
