@@ -1,6 +1,6 @@
 const fs = require('fs');
 const { execSync } = require('child_process');
-const chromium = require('@sparticuz/chrome-aws-lambda');
+const chromium = require('@sparticuz/chromium');
 const AWS = require('aws-sdk');
 
 exports.handle = async function (event) {
@@ -8,8 +8,15 @@ exports.handle = async function (event) {
         return;
     }
 
+    // sparticuz/chromium specific settings.
+    // https://github.com/Sparticuz/chromium#usage
+    // Use legacy headless mode.
+    chromium.setHeadlessMode = true;
+    // Disable webgl.
+    chromium.setGraphicsMode = false;
+
     // Add Emoji Font to Chromium
-    await chromium.font( '/var/task/NotoColorEmoji.ttf');
+    await chromium.font('/var/task/NotoColorEmoji.ttf');
 
     // Constant file where we write out options.
     const options = '/tmp/browsershot.js';
@@ -47,9 +54,8 @@ exports.handle = async function (event) {
 
         event.url = 'file:///tmp/index.html';
     }
-
     // Get the executable path from the chrome layer.
-    event.options.executablePath = await chromium.executablePath;
+    event.options.executablePath = await chromium.executablePath();
 
     // Combine the developers args with the ones from the layer.
     event.options.args = [
@@ -107,7 +113,7 @@ exports.handle = async function (event) {
                 Bucket: event.options.s3.bucket,
                 Key: event.options.s3.path,
                 Body: contents,
-                ContentType: type
+                ContentType: type,
             }
 
             const result = await s3.putObject(params).promise();
