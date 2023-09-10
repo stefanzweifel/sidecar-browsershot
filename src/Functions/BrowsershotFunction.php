@@ -56,6 +56,7 @@ class BrowsershotFunction extends LambdaFunction
     public function runtime()
     {
         return Runtime::NODEJS_16;
+        return 'nodejs18.x';
     }
 
     public function memory()
