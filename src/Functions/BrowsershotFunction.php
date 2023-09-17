@@ -22,10 +22,6 @@ class BrowsershotFunction extends LambdaFunction
     public function package()
     {
         return Package::make()
-            ->setBasePath(__DIR__ . '/../..')
-            ->include([
-                'node_modules/',
-            ])
             ->includeStrings([
                 'browser.cjs' => $this->modifiedBrowserJs(),
             ])
