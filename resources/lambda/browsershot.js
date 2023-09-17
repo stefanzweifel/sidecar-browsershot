@@ -1,7 +1,7 @@
 const fs = require('fs');
 const { execSync } = require('child_process');
 const chromium = require('@sparticuz/chromium');
-const AWS = require('aws-sdk');
+const {S3} = require('aws-sdk');
 
 exports.handle = async function (event) {
     if (event.warming) {
@@ -37,7 +37,7 @@ exports.handle = async function (event) {
         event.url = 'file:///tmp/index.html';
     } else if (event.options.s3Source) {
         // If the source is S3, then download the file into a temporary file to be used as the URL.
-        const s3 = new AWS.S3({
+        const s3 = new S3({
             region: event.options.s3Source.region,
             accessKeyId: event.options.s3Source.key,
             secretAccessKey: event.options.s3Source.secret,
@@ -90,7 +90,7 @@ exports.handle = async function (event) {
         if (event.options.s3) {
             const accessKeyId = event.options.s3.key;
             const secretAccessKey = event.options.s3.secret;
-            const s3 = new AWS.S3({
+            const s3 = new S3({
                 region: event.options.s3.region,
                 accessKeyId: event.options.s3.key,
                 secretAccessKey: event.options.s3.secret,
