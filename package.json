@@ -1,9 +1,0 @@
-{
-    "scripts": {
-        "build": "node_modules/.bin/ncc build resources/lambda/browsershot.js -o resources/lambda/dist"
-    },
-    "dependencies": {
-        "@vercel/ncc": "^0.36.1",
-        "aws-sdk": "^2.1454.0"
-    }
-}
