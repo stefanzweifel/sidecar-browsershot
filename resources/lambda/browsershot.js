@@ -1,7 +1,7 @@
 const fs = require('fs');
 const { execSync } = require('child_process');
 const chromium = require('@sparticuz/chromium');
-const {S3} = require('aws-sdk');
+const { S3 } = require("@aws-sdk/client-s3");
 
 exports.handle = async function (event) {
     if (event.warming) {
@@ -48,7 +48,7 @@ exports.handle = async function (event) {
             Key: event.options.s3Source.path,
         }
 
-        const result = await s3.getObject(params).promise();
+        const result = await s3.getObject(params);
 
         fs.writeFileSync('/tmp/index.html', result.Body);
 
@@ -116,7 +116,7 @@ exports.handle = async function (event) {
                 ContentType: type,
             }
 
-            const result = await s3.putObject(params).promise();
+            const result = await s3.putObject(params);
 
             return result.ETag
         }
