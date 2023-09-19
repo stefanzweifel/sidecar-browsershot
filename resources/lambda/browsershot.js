@@ -50,7 +50,7 @@ exports.handle = async function (event) {
 
         const result = await s3.getObject(params);
 
-        fs.writeFileSync('/tmp/index.html', result.Body);
+        fs.writeFileSync('/tmp/index.html', result.Body.toString());
 
         event.url = 'file:///tmp/index.html';
     }
