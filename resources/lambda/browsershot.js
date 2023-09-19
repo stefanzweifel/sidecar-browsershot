@@ -121,7 +121,7 @@ exports.handle = async function (event) {
             return result.ETag
         }
 
-        return new Buffer(contents).toString('base64');
+        return new Buffer.from(contents).toString('base64');
     }
 
     // Otherwise, return the string.
