@@ -118,7 +118,7 @@ exports.handle = async function (event) {
 
             const result = await s3.putObject(params);
 
-            return result.ETag
+            return result.ETag;
         }
 
         return new Buffer.from(contents).toString('base64');
