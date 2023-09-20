@@ -5,7 +5,6 @@ namespace Wnx\SidecarBrowsershot\Functions;
 use Hammerstone\Sidecar\Architecture;
 use Hammerstone\Sidecar\LambdaFunction;
 use Hammerstone\Sidecar\Package;
-use Hammerstone\Sidecar\Runtime;
 use Hammerstone\Sidecar\WarmingConfig;
 
 class BrowsershotFunction extends LambdaFunction
@@ -49,13 +48,13 @@ class BrowsershotFunction extends LambdaFunction
         // Remove their reference.
         $browser = str_replace('const puppet = (pup || require(\'puppeteer\'));', '', $browser);
 
-        // Add ours.
-        return "const puppet = require('@sparticuz/chrome-aws-lambda').puppeteer; \n" . $browser;
+        // Use pupeteer-core instead.
+        return "const puppet = require('puppeteer-core'); \n" . $browser;
     }
 
     public function runtime()
     {
-        return Runtime::NODEJS_14;
+        return 'nodejs18.x';
     }
 
     public function memory()
@@ -68,7 +67,7 @@ class BrowsershotFunction extends LambdaFunction
      */
     public function storage()
     {
-        // Default to the main sidecar config value if the sidecar-browsershot config hasn't been updated to include this new key.
+        // Defaults to the main sidecar config value if the sidecar-browsershot config hasn't been updated to include this new key.
         return config('sidecar-browsershot.storage', parent::storage());
     }
 
@@ -93,7 +92,19 @@ class BrowsershotFunction extends LambdaFunction
 
         $region = config('sidecar.aws_region');
 
+        if ($region === 'ap-northeast-2') {
+            $chromeAwsLambdaVersion = 36;
+        } else {
+            $chromeAwsLambdaVersion = 37;
+        }
+
+
+        // Add Layers that each contain `puppeteer-core` and `@sparticuz/chromium`
+        // https://github.com/stefanzweifel/sidecar-browsershot-layer
         // https://github.com/shelfio/chrome-aws-lambda-layer
-        return ["arn:aws:lambda:{$region}:764866452798:layer:chrome-aws-lambda:31"];
+        return [
+            "arn:aws:lambda:{$region}:821527532446:layer:sidecar-browsershot-layer:1",
+            "arn:aws:lambda:{$region}:764866452798:layer:chrome-aws-lambda:{$chromeAwsLambdaVersion}",
+        ];
     }
 }

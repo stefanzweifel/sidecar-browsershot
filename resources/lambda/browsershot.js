@@ -1,15 +1,22 @@
 const fs = require('fs');
 const { execSync } = require('child_process');
-const chromium = require('@sparticuz/chrome-aws-lambda');
-const AWS = require('aws-sdk');
+const chromium = require('@sparticuz/chromium');
+const { S3 } = require("@aws-sdk/client-s3");
 
 exports.handle = async function (event) {
     if (event.warming) {
         return;
     }
 
+    // sparticuz/chromium specific settings.
+    // https://github.com/Sparticuz/chromium#usage
+    // Use legacy headless mode.
+    chromium.setHeadlessMode = true;
+    // Disable webgl.
+    chromium.setGraphicsMode = false;
+
     // Add Emoji Font to Chromium
-    await chromium.font( '/var/task/NotoColorEmoji.ttf');
+    await chromium.font('/var/task/NotoColorEmoji.ttf');
 
     // Constant file where we write out options.
     const options = '/tmp/browsershot.js';
@@ -30,7 +37,7 @@ exports.handle = async function (event) {
         event.url = 'file:///tmp/index.html';
     } else if (event.options.s3Source) {
         // If the source is S3, then download the file into a temporary file to be used as the URL.
-        const s3 = new AWS.S3({
+        const s3 = new S3({
             region: event.options.s3Source.region,
             accessKeyId: event.options.s3Source.key,
             secretAccessKey: event.options.s3Source.secret,
@@ -41,15 +48,14 @@ exports.handle = async function (event) {
             Key: event.options.s3Source.path,
         }
 
-        const result = await s3.getObject(params).promise();
+        const result = await s3.getObject(params);
 
-        fs.writeFileSync('/tmp/index.html', result.Body);
+        fs.writeFileSync('/tmp/index.html', result.Body.toString());
 
         event.url = 'file:///tmp/index.html';
     }
-
     // Get the executable path from the chrome layer.
-    event.options.executablePath = await chromium.executablePath;
+    event.options.executablePath = await chromium.executablePath();
 
     // Combine the developers args with the ones from the layer.
     event.options.args = [
@@ -84,7 +90,7 @@ exports.handle = async function (event) {
         if (event.options.s3) {
             const accessKeyId = event.options.s3.key;
             const secretAccessKey = event.options.s3.secret;
-            const s3 = new AWS.S3({
+            const s3 = new S3({
                 region: event.options.s3.region,
                 accessKeyId: event.options.s3.key,
                 secretAccessKey: event.options.s3.secret,
@@ -107,15 +113,15 @@ exports.handle = async function (event) {
                 Bucket: event.options.s3.bucket,
                 Key: event.options.s3.path,
                 Body: contents,
-                ContentType: type
+                ContentType: type,
             }
 
-            const result = await s3.putObject(params).promise();
+            const result = await s3.putObject(params);
 
-            return result.ETag
+            return result.ETag;
         }
 
-        return new Buffer(contents).toString('base64');
+        return new Buffer.from(contents).toString('base64');
     }
 
     // Otherwise, return the string.

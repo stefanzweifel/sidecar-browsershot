@@ -25,6 +25,7 @@ return [
      * AWS Layer to use by Lambda. Defaults to "shelfio/chrome-aws-lambda-layer" in your AWS region.
      * Must contain "chrome-aws-lambda".
      * @see https://github.com/shelfio/chrome-aws-lambda-layer
+     * @deprecated
      */
     'layer' => env('SIDECAR_BROWSERSHOT_LAYER'),
 ];
