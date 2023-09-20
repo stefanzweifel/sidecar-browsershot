@@ -86,7 +86,6 @@ class BrowsershotFunction extends LambdaFunction
 
     public function layers()
     {
-        // TODO: Rename config to `layers`
         if ($layer = config('sidecar-browsershot.layer')) {
             return [$layer];
         }
