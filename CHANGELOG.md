@@ -5,7 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-## [Unreleased](https://github.com/stefanzweifel/sidecar-browsershot/compare/v1.9.1...HEAD)
+## [Unreleased](https://github.com/stefanzweifel/sidecar-browsershot/compare/v1.10.0...HEAD)
+
+## [v1.10.0](https://github.com/stefanzweifel/sidecar-browsershot/compare/v1.9.1...v1.10.0) - 2023-09-20
+
+### Added
+
+- Update to Node 18 Runtime and update used Chromium Version ([#85](https://github.com/stefanzweifel/sidecar-browsershot/pull/85))
+
+### Changed
+
+- Bump actions/checkout from 3 to 4 ([#84](https://github.com/stefanzweifel/sidecar-browsershot/pull/84))
+- Fix GitHub Actions badges in `README.md` ([#82](https://github.com/stefanzweifel/sidecar-browsershot/pull/82))
 
 ## [v1.9.1](https://github.com/stefanzweifel/sidecar-browsershot/compare/v1.9.0...v1.9.1) - 2023-07-05
 
