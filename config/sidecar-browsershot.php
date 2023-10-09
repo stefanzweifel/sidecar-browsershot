@@ -16,6 +16,12 @@ return [
     'storage' => env('SIDECAR_BROWSERSHOT_STORAGE', 512),
 
     /**
+     * The default timeout to use for SidecarBrowsershot, in seconds. (Defaults to 300)
+     * @see https://hammerstone.dev/sidecar/docs/main/functions/customization#timeout
+     */
+    'timeout' => env('SIDECAR_BROWSERSHOT_TIMEOUT', 300),
+
+    /**
      * Define the number of warming instances to boot.
      * @see https://hammerstone.dev/sidecar/docs/main/functions/warming
      */
