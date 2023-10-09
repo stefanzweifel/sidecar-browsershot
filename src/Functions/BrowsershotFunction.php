@@ -74,6 +74,15 @@ class BrowsershotFunction extends LambdaFunction
     /**
      * @inheritDoc
      */
+    public function timeout()
+    {
+        // Defaults to the main sidecar config value if the sidecar-browsershot config hasn't been updated to include this new key.
+        return config('sidecar-browsershot.timeout', parent::timeout());
+    }
+
+    /**
+     * @inheritDoc
+     */
     public function architecture()
     {
         return Architecture::X86_64;
