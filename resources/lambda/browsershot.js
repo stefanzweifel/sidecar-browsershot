@@ -49,8 +49,8 @@ exports.handle = async function (event) {
         }
 
         const result = await s3.getObject(params);
-
-        fs.writeFileSync('/tmp/index.html', result.Body.toString());
+        const fileContents = await streamToString(result.Body);
+        fs.writeFileSync('/tmp/index.html', fileContents);
 
         event.url = 'file:///tmp/index.html';
     }
@@ -126,4 +126,16 @@ exports.handle = async function (event) {
 
     // Otherwise, return the string.
     return result.toString();
+};
+
+/**
+ * Read a stream into a string.
+ */
+const streamToString = function(stream) {
+    return new Promise((resolve, reject) => {
+        const chunks = [];
+        stream.on('data', (chunk) => chunks.push(chunk));
+        stream.on('error', reject);
+        stream.on('end', () => resolve(Buffer.concat(chunks).toString('utf8')));
+    });
 };
