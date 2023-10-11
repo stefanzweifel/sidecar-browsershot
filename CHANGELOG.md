@@ -5,7 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-## [Unreleased](https://github.com/stefanzweifel/sidecar-browsershot/compare/v1.11.0...HEAD)
+## [Unreleased](https://github.com/stefanzweifel/sidecar-browsershot/compare/v1.11.1...HEAD)
+
+## [v1.11.1](https://github.com/stefanzweifel/sidecar-browsershot/compare/v1.11.0...v1.11.1) - 2023-10-11
+
+### Fixed
+
+- Read the content of a file in s3 into a string ([#93](https://github.com/stefanzweifel/sidecar-browsershot/pull/93))
 
 ## [v1.11.0](https://github.com/stefanzweifel/sidecar-browsershot/compare/v1.10.0...v1.11.0) - 2023-10-09
 
