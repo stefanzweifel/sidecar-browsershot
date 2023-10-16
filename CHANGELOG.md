@@ -5,7 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-## [Unreleased](https://github.com/stefanzweifel/sidecar-browsershot/compare/v1.11.1...HEAD)
+## [Unreleased](https://github.com/stefanzweifel/sidecar-browsershot/compare/v1.12.0...HEAD)
+
+## [v1.12.0](https://github.com/stefanzweifel/sidecar-browsershot/compare/v1.11.1...v1.12.0) - 2023-10-16
+
+### Added
+
+- Add Support for PHP 8.3 ([#98](https://github.com/stefanzweifel/sidecar-browsershot/pull/98))
 
 ## [v1.11.1](https://github.com/stefanzweifel/sidecar-browsershot/compare/v1.11.0...v1.11.1) - 2023-10-11
 
