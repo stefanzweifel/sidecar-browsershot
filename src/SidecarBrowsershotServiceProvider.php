@@ -20,4 +20,11 @@ class SidecarBrowsershotServiceProvider extends PackageServiceProvider
             ->hasConfigFile()
             ->hasCommand(InternalBrowsershotSetupCommand::class);
     }
+
+    public function bootingPackage()
+    {
+        $this->publishes([
+            __DIR__.'/../resources/lambda/fonts' => resource_path(config('font_resource_path', 'sidecar-browsershot/fonts'))
+        ], 'sidecar-browsershot-fonts');
+    }
 }

@@ -34,4 +34,6 @@ return [
      * @deprecated
      */
     'layer' => env('SIDECAR_BROWSERSHOT_LAYER'),
+
+    'font_resource_path' => 'sidecar-browsershot/fonts',
 ];

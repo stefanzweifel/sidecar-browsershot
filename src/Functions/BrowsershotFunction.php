@@ -21,14 +21,40 @@ class BrowsershotFunction extends LambdaFunction
 
     public function package()
     {
-        return Package::make()
+        $package = Package::make()
             ->includeStrings([
                 'browser.cjs' => $this->modifiedBrowserJs(),
             ])
             ->includeExactly([
                 __DIR__ . '/../../resources/lambda/browsershot.js' => 'browsershot.js',
-                __DIR__ . '/../../resources/lambda/NotoColorEmoji.ttf' => 'NotoColorEmoji.ttf',
             ]);
+        return $this->packageFonts($package);
+    }
+
+    private function packageFonts(Package $package): Package
+    {
+        $fontResourcePath = config('font_resource_path', 'sidecar-browsershot/fonts');
+        $fontResourceDir = resource_path($fontResourcePath);
+
+        if (!file_exists($fontResourceDir))
+        {
+            $package->includeExactly([
+                __DIR__ . '/../../resources/lambda/fonts/NotoColorEmoji.ttf' => 'fonts/NotoColorEmoji.ttf',
+            ]);
+        }
+        else
+        {
+            foreach (scandir($fontResourceDir) as $file)
+            {
+                if (is_file($fontResourceDir.$file))
+                {
+                    $package->includeExactly([
+                        "$fontResourceDir/$file" => "fonts/$file",
+                    ]);
+                }
+            }
+        }
+        return $package;
     }
 
     /**
