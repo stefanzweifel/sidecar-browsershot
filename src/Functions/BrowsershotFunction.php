@@ -21,34 +21,36 @@ class BrowsershotFunction extends LambdaFunction
 
     public function package()
     {
-        $package = Package::make()
+        return Package::make()
             ->includeStrings([
                 'browser.cjs' => $this->modifiedBrowserJs(),
             ])
             ->includeExactly([
                 __DIR__ . '/../../resources/lambda/browsershot.js' => 'browsershot.js',
-            ]);
-        return $this->packageFonts($package);
+            ])
+            ->includeExactly($this->customFonts());
     }
 
-    protected function packageFonts(Package $package): Package
+    protected function customFonts(): array
     {
-        $fontResourceDir = config('sidecar-browsershot.fonts', 'sidecar-browsershot/fonts');
+        $fonts = collect();
+        $fontDirectory = str(config('sidecar-browsershot.fonts'))->finish(DIRECTORY_SEPARATOR);
 
-        if (! file_exists($fontResourceDir)) {
-            $package->includeExactly([
-                __DIR__ . '/../../resources/lambda/fonts/NotoColorEmoji.ttf' => 'fonts/NotoColorEmoji.ttf',
-            ]);
-        } else {
-            foreach (scandir($fontResourceDir) as $file) {
-                if (is_file($fontResourceDir . $file)) {
-                    $package->includeExactly([
-                        "$fontResourceDir/$file" => "fonts/$file",
-                    ]);
+        // Check if the custom fonts folder exists.
+        if (file_exists($fontDirectory)) {
+            // Loop through all files in the custom fonts folder.
+            foreach (scandir($fontDirectory) as $file) {
+                if (is_file($fontDirectory . $file)) {
+                    $fonts->prepend("fonts/$file", $fontDirectory . $file);
                 }
             }
         }
-        return $package;
+
+        // By default, we include the NotoColorEmoji font.
+        $fonts->prepend('fonts/NotoColorEmoji.ttf', __DIR__ . '/../../resources/lambda/fonts/NotoColorEmoji.ttf');
+
+        // Ensure that we only have unique font values.
+        return $fonts->unique()->toArray();
     }
 
     /**
