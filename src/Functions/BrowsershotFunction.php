@@ -33,7 +33,7 @@ class BrowsershotFunction extends LambdaFunction
 
     private function packageFonts(Package $package): Package
     {
-        $fontResourcePath = config('font_resource_path', 'sidecar-browsershot/fonts');
+        $fontResourcePath = config('sidecar-browsershot.fonts', 'sidecar-browsershot/fonts');
         $fontResourceDir = resource_path($fontResourcePath);
 
         if (! file_exists($fontResourceDir)) {
