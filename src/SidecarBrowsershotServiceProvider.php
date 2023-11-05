@@ -25,7 +25,7 @@ class SidecarBrowsershotServiceProvider extends PackageServiceProvider
     {
         // Make default fonts publishable for package consumers
         $this->publishes([
-            __DIR__.'/../resources/lambda/fonts' => resource_path(config('sidecar-browsershot.fonts', 'sidecar-browsershot/fonts'))
+            __DIR__.'/../resources/lambda/fonts' => config('sidecar-browsershot.fonts')
         ], 'sidecar-browsershot-fonts');
     }
 }

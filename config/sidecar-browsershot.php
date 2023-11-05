@@ -35,5 +35,5 @@ return [
      */
     'layer' => env('SIDECAR_BROWSERSHOT_LAYER'),
 
-    'fonts' => 'sidecar-browsershot/fonts',
+    'fonts' => resource_path('sidecar-browsershot/fonts'),
 ];
