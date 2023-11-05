@@ -20,7 +20,7 @@ afterAll(function () {
     }
 });
 
-it('generates reference hello-world-with-smileys.pdf', function () {
+it('generates reference hello-world-with-smileys.jpg', function () {
     $this->assertFileDoesNotExist('example.jpg');
     BrowsershotLambda::html('<h1 style="font-weight: 400;">Hello world!! 👋🦫🫠</h1>')->save('example.jpg');
     $this->assertFileExists('example.jpg');
@@ -28,4 +28,12 @@ it('generates reference hello-world-with-smileys.pdf', function () {
         file_get_contents(__DIR__.'/references/hello-world-with-smileys.jpg'),
         file_get_contents('example.jpg'),
     );
+});
+
+it('generates reference hello-world-with-smileys.pdf', function () {
+    $pdf = BrowsershotLambda::html('<h1 style="font-weight: 400;">Hello world!! 👋🦫🫠</h1>')->pdf();
+    $pdfWithCorrectDates = $this->updateCreationDateAndModDateOfPdf($pdf);
+    $reference = file_get_contents(__DIR__.'/references/hello-world-with-smileys.pdf');
+
+    $this->assertEquals($reference, $pdfWithCorrectDates);
 });
