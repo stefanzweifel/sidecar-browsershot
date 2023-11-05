@@ -35,5 +35,8 @@ return [
      */
     'layer' => env('SIDECAR_BROWSERSHOT_LAYER'),
 
+    /**
+     * Define the path to the custom font directory.
+     */
     'fonts' => resource_path('sidecar-browsershot/fonts'),
 ];
