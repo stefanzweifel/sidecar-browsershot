@@ -21,8 +21,9 @@ class SidecarBrowsershotServiceProvider extends PackageServiceProvider
             ->hasCommand(InternalBrowsershotSetupCommand::class);
     }
 
-    public function bootingPackage()
+    public function bootingPackage(): void
     {
+        // Make default fonts publishable for package consumers
         $this->publishes([
             __DIR__.'/../resources/lambda/fonts' => resource_path(config('font_resource_path', 'sidecar-browsershot/fonts'))
         ], 'sidecar-browsershot-fonts');
