@@ -36,18 +36,13 @@ class BrowsershotFunction extends LambdaFunction
         $fontResourcePath = config('font_resource_path', 'sidecar-browsershot/fonts');
         $fontResourceDir = resource_path($fontResourcePath);
 
-        if (!file_exists($fontResourceDir))
-        {
+        if (! file_exists($fontResourceDir)) {
             $package->includeExactly([
                 __DIR__ . '/../../resources/lambda/fonts/NotoColorEmoji.ttf' => 'fonts/NotoColorEmoji.ttf',
             ]);
-        }
-        else
-        {
-            foreach (scandir($fontResourceDir) as $file)
-            {
-                if (is_file($fontResourceDir.$file))
-                {
+        } else {
+            foreach (scandir($fontResourceDir) as $file) {
+                if (is_file($fontResourceDir . $file)) {
                     $package->includeExactly([
                         "$fontResourceDir/$file" => "fonts/$file",
                     ]);
