@@ -140,6 +140,13 @@ BrowsershotLambda::url('https://example.com')
     ->saveToS3('example.jpg');
 ```
 
+## Register Custom Fonts
+
+By default, sidecar-browsershot includes the "Noto Color Emoji"-font, to ensure that emojis are rendered correctly.
+If you want to use custom fonts, you can put them all into a `resources/sidecar-browsershot/fonts`-folder. (You can customize the location of that folder in the `sidecar-browsershot.fonts` config)
+
+sidecar-browsershot will include all files in that folder when deploying the Lambda function and will register them automatically in Chromium for you.
+
 ## Testing
 
 The testsuite makes connections to AWS and runs the deployed Lambda function. In order to run the testsuite, you will need an active [AWS account](https://aws.amazon.com/).

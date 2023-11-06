@@ -15,8 +15,11 @@ exports.handle = async function (event) {
     // Disable webgl.
     chromium.setGraphicsMode = false;
 
-    // Add Emoji Font to Chromium
-    await chromium.font('/var/task/NotoColorEmoji.ttf');
+    // Add custom fonts to chromium.
+    const fontsFileNames = fs.readdirSync('/var/task/fonts/');
+    for (const fontFileName of fontsFileNames) {
+        await chromium.font(`/var/task/fonts/${fontFileName}`);
+    }
 
     // Constant file where we write out options.
     const options = '/tmp/browsershot.js';

@@ -40,4 +40,15 @@ class TestCase extends Orchestra
         config()->set('filesystems.disks.s3.region', env('SIDECAR_REGION'));
         config()->set('filesystems.disks.s3.bucket', env('SIDECAR_ARTIFACT_BUCKET_NAME'));
     }
+
+    protected function updateCreationDateAndModDateOfPdf(string $pdf): string
+    {
+        return preg_replace([
+            "#/CreationDate \(D:(\d){14}\+(\d){2}'(\d){2}'\)\\n#",
+            "#/ModDate \(D:(\d){14}\+(\d){2}'(\d){2}'\)>>\\n#",
+        ], [
+            "/CreationDate (D:20230101000000+00'00')\n",
+            "/ModDate (D:20230101000000+00'00')>>\n",
+        ], $pdf, limit: 1);
+    }
 }

@@ -27,8 +27,30 @@ class BrowsershotFunction extends LambdaFunction
             ])
             ->includeExactly([
                 __DIR__ . '/../../resources/lambda/browsershot.js' => 'browsershot.js',
-                __DIR__ . '/../../resources/lambda/NotoColorEmoji.ttf' => 'NotoColorEmoji.ttf',
-            ]);
+            ])
+            ->includeExactly($this->customFonts());
+    }
+
+    protected function customFonts(): array
+    {
+        $fonts = collect();
+        $fontDirectory = str(config('sidecar-browsershot.fonts'))->finish(DIRECTORY_SEPARATOR);
+
+        // Check if the custom fonts folder exists.
+        if (file_exists($fontDirectory)) {
+            // Loop through all files in the custom fonts folder.
+            foreach (scandir($fontDirectory) as $file) {
+                if (is_file($fontDirectory . $file)) {
+                    $fonts->prepend("fonts/$file", $fontDirectory . $file);
+                }
+            }
+        }
+
+        // By default, we include the NotoColorEmoji font.
+        $fonts->prepend('fonts/NotoColorEmoji.ttf', __DIR__ . '/../../resources/lambda/fonts/NotoColorEmoji.ttf');
+
+        // Ensure that we only have unique font values.
+        return $fonts->unique()->toArray();
     }
 
     /**
