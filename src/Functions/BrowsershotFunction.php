@@ -2,11 +2,11 @@
 
 namespace Wnx\SidecarBrowsershot\Functions;
 
-use Illuminate\Support\Str;
 use Hammerstone\Sidecar\Architecture;
 use Hammerstone\Sidecar\LambdaFunction;
 use Hammerstone\Sidecar\Package;
 use Hammerstone\Sidecar\WarmingConfig;
+use Illuminate\Support\Str;
 
 class BrowsershotFunction extends LambdaFunction
 {
