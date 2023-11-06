@@ -2,6 +2,7 @@
 
 namespace Wnx\SidecarBrowsershot\Functions;
 
+use Illuminate\Support\Str;
 use Hammerstone\Sidecar\Architecture;
 use Hammerstone\Sidecar\LambdaFunction;
 use Hammerstone\Sidecar\Package;
@@ -34,7 +35,7 @@ class BrowsershotFunction extends LambdaFunction
     protected function customFonts(): array
     {
         $fonts = collect();
-        $fontDirectory = str(config('sidecar-browsershot.fonts'))->finish(DIRECTORY_SEPARATOR);
+        $fontDirectory = Str::finish(config('sidecar-browsershot.fonts'), DIRECTORY_SEPARATOR);
 
         // Check if the custom fonts folder exists.
         if (file_exists($fontDirectory)) {
