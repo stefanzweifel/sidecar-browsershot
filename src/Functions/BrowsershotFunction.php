@@ -118,8 +118,8 @@ class BrowsershotFunction extends LambdaFunction
 
     public function layers()
     {
-        if ($layer = config('sidecar-browsershot.layer')) {
-            return [$layer];
+        if ($layers = config('sidecar-browsershot.layers')) {
+            return $layers;
         }
 
         $region = config('sidecar.aws_region');
