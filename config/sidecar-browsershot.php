@@ -22,7 +22,7 @@ return [
     'timeout' => env('SIDECAR_BROWSERSHOT_TIMEOUT', 300),
 
     /**
-     * Define the number of warming instances to boot.
+     *Number of warming instances to boot.
      * @see https://hammerstone.dev/sidecar/docs/main/functions/warming
      */
     'warming' => env('SIDECAR_BROWSERSHOT_WARMING_INSTANCES', 0),
@@ -44,7 +44,9 @@ return [
     ],
 
     /**
-     * Define the path to the custom font directory.
+     * Path to local directory containing fonts to be installed in the Lambda function.
+     * During deployment, BorwsershotLambda will scan this directory for
+     * any files and will bundle them into the Lambda function.
      */
     'fonts' => resource_path('sidecar-browsershot/fonts'),
 ];

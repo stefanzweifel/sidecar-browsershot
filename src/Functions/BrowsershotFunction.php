@@ -55,7 +55,7 @@ class BrowsershotFunction extends LambdaFunction
     }
 
     /**
-     * We get puppeteer out of the layer, which spatie doesn't allow
+     * We get puppeteer out of the layer, which Spatie doesn't allow
      * for. We'll just overwrite their browser.cjs to add it.
      *
      * @return string
@@ -75,11 +75,17 @@ class BrowsershotFunction extends LambdaFunction
         return "const puppet = require('puppeteer-core'); \n" . $browser;
     }
 
+    /**
+     * @inheritDoc
+     */
     public function runtime()
     {
         return 'nodejs18.x';
     }
 
+    /**
+     * @inheritDoc
+     */
     public function memory()
     {
         return config('sidecar-browsershot.memory');
@@ -111,6 +117,9 @@ class BrowsershotFunction extends LambdaFunction
         return Architecture::X86_64;
     }
 
+    /**
+     * @inheritDoc
+     */
     public function warmingConfig()
     {
         return WarmingConfig::instances(config('sidecar-browsershot.warming'));
