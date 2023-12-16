@@ -7,6 +7,7 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Spatie\Browsershot\Browsershot;
+use Spatie\Browsershot\ChromiumResult;
 use Spatie\Browsershot\Exceptions\CouldNotTakeBrowsershot;
 use Spatie\Browsershot\Exceptions\ElementNotFound;
 use Wnx\SidecarBrowsershot\Functions\BrowsershotFunction;
@@ -29,16 +30,37 @@ class BrowsershotLambda extends Browsershot
             $this->throwError($response);
         }
 
+        // If the response is not valid JSON, it's probably a base64 encoded string representing a binary file.
+        // In this case, we will return the base64 decoded string.
+        if (json_decode($response->body(), true) === null) {
+            $result = base64_decode($response->body());
+        } else {
+            $result = $response->body();
+
+            // If the response is valid JSON, we can cast it to a Chromium Result.
+            // It will contain the result and additional information about the Chromium process.
+            if (is_array($chromiumResult = json_decode($response->body(), true))) {
+                $this->chromiumResult = new ChromiumResult($chromiumResult);
+            }
+        }
+
         $s3 = Arr::get($command, 'options.s3');
         $path = Arr::get($command, 'options.path');
 
         if ($path && ! $s3) {
-            file_put_contents($path, base64_decode($response->body()));
+            file_put_contents($path, $result);
 
             return $path;
-        } else {
-            return $response->body();
         }
+
+        // If ChromiumResult is available, return the result from there.
+        if ($this->chromiumResult)  {
+            return $this->chromiumResult->getResult();
+        }
+
+        // The result can now be either a base64 deocded string representing a binary file or a string representing
+        // the ETag of a file on S3.
+        return $result;
     }
 
     /**
