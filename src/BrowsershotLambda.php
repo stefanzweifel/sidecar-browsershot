@@ -54,7 +54,7 @@ class BrowsershotLambda extends Browsershot
         }
 
         // If ChromiumResult is available, return the result from there.
-        if ($this->chromiumResult)  {
+        if ($this->chromiumResult) {
             return $this->chromiumResult->getResult();
         }
 
