@@ -27,7 +27,7 @@ class BrowsershotFunction extends LambdaFunction
                 'browser.cjs' => $this->modifiedBrowserJs(),
             ])
             ->includeExactly([
-                __DIR__ . '/../../resources/lambda/browsershot.js' => 'browsershot.js',
+                __DIR__.'/../../resources/lambda/browsershot.js' => 'browsershot.js',
             ])
             ->includeExactly($this->customFonts());
     }
@@ -41,14 +41,14 @@ class BrowsershotFunction extends LambdaFunction
         if (file_exists($fontDirectory)) {
             // Loop through all files in the custom fonts folder.
             foreach (scandir($fontDirectory) as $file) {
-                if (is_file($fontDirectory . $file)) {
-                    $fonts->prepend("fonts/$file", $fontDirectory . $file);
+                if (is_file($fontDirectory.$file)) {
+                    $fonts->prepend("fonts/$file", $fontDirectory.$file);
                 }
             }
         }
 
         // By default, we include the NotoColorEmoji font.
-        $fonts->prepend('fonts/NotoColorEmoji.ttf', __DIR__ . '/../../resources/lambda/fonts/NotoColorEmoji.ttf');
+        $fonts->prepend('fonts/NotoColorEmoji.ttf', __DIR__.'/../../resources/lambda/fonts/NotoColorEmoji.ttf');
 
         // Ensure that we only have unique font values.
         return $fonts->unique()->toArray();
@@ -72,7 +72,7 @@ class BrowsershotFunction extends LambdaFunction
         $browser = str_replace('const puppet = (pup || require(\'puppeteer\'));', '', $browser);
 
         // Use pupeteer-core instead.
-        return "const puppet = require('puppeteer-core'); \n" . $browser;
+        return "const puppet = require('puppeteer-core'); \n".$browser;
     }
 
     public function runtime()
@@ -86,7 +86,7 @@ class BrowsershotFunction extends LambdaFunction
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function storage()
     {
@@ -95,7 +95,7 @@ class BrowsershotFunction extends LambdaFunction
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function timeout()
     {
@@ -104,7 +104,7 @@ class BrowsershotFunction extends LambdaFunction
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function architecture()
     {
@@ -129,7 +129,6 @@ class BrowsershotFunction extends LambdaFunction
         } else {
             $chromeAwsLambdaVersion = 37;
         }
-
 
         // Add Layers that each contain `puppeteer-core` and `@sparticuz/chromium`
         // https://github.com/stefanzweifel/sidecar-browsershot-layer

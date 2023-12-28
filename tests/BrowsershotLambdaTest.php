@@ -62,7 +62,7 @@ it('returns raw html from url', function () {
 it('returns raw html from html', function () {
     $html = BrowsershotLambda::html('<h1>Hello world!!</h1>')->bodyHtml();
 
-    $this->assertEquals("<html><head></head><body><h1>Hello world!!</h1></body></html>", $html);
+    $this->assertEquals('<html><head></head><body><h1>Hello world!!</h1></body></html>', $html);
 });
 
 it('throws LambdaExecutionException error if browsershot fails', function () {
