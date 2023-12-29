@@ -119,7 +119,9 @@ BrowsershotLambda::html('<h1>Hello world!!</h1>')->saveToS3('example.pdf', 'exam
 ```
 
 ## Image Manipulation
-Like the original Browsershot package, you can [manipulate the image](https://spatie.be/docs/browsershot/v2/usage/creating-images#content-sizing-the-image) size and format.
+Like the original Browsershot package, you can [manipulate the image](https://spatie.be/docs/browsershot/v4/usage/creating-images#content-sizing-the-image) size and format.
+
+To perform image manipulations on the screenshot, you need to install the optional dependency `spatie/image`. v3 or higher is required.
 
 > **Note**   
 > If you're using `fit()` in combination with `saveToS3`, the image will be downloaded from S3 to your local disc, manipulated and then uploaded back to S3.
@@ -128,7 +130,7 @@ Like the original Browsershot package, you can [manipulate the image](https://sp
 // Take screenshot at 1920x1080 and scale it down to fit 200x200 
 BrowsershotLambda::url('https://example.com')
     ->windowSize(1920, 1080)
-    ->fit(Manipulations::FIT_CONTAIN, 200, 200)
+    ->fit(Spatie\Image\Enums\Fit::Contain, 200, 200)
     ->save('example.jpg');
     
 // Take screenshot at 1920x1080 and scale it down to fit 200x200 and save it on S3
@@ -136,7 +138,7 @@ BrowsershotLambda::url('https://example.com')
 // from S3 to the local disc of your app, manipulate it and then upload it back to S3. 
 BrowsershotLambda::url('https://example.com')
     ->windowSize(1920, 1080)
-    ->fit(Manipulations::FIT_CONTAIN, 200, 200)
+    ->fit(Spatie\Image\Enums\Fit::Contain, 200, 200)
     ->saveToS3('example.jpg');
 ```
 
