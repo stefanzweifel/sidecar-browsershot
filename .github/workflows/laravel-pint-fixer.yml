@@ -1,0 +1,10 @@
+name: Laravel Pint
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  pint:
+    uses: stefanzweifel/reusable-workflows/.github/workflows/laravel-pint-fixer.yml@main
