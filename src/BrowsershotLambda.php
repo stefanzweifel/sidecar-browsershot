@@ -121,7 +121,7 @@ class BrowsershotLambda extends Browsershot
 
         $localPath = Storage::disk('local')->path($imagePath);
 
-        $this->applyManipulations($localPath);
+        $this->imageManipulations->apply($localPath);
 
         // Upload the manipulated image back to S3 and delete the temporary file.
         Storage::disk($disk)->put($imagePath, Storage::disk('local')->get($imagePath));
