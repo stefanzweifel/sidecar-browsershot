@@ -32,16 +32,25 @@ return [
     'warming' => env('SIDECAR_BROWSERSHOT_WARMING_INSTANCES', 0),
 
     /**
-     * AWS Layer to use by Lambda. Defaults to "shelfio/chrome-aws-lambda-layer" in your AWS region.
-     * Must contain "chrome-aws-lambda".
+     * AWS Layers to use by the Lambda function.
+     * Defaults to "shelfio/chrome-aws-lambda-layer" and "sidecar-browsershot-layer" in your respective AWS region.
+     *
+     * If you customize this, you must include both "sidecar-browsershot-layer" and "shelfio/chrome-aws-lambda-layer"
+     * in your list, as the config overrides the default values.
+     * (See BrowsershotFunction@layers for more details)
      *
      * @see https://github.com/shelfio/chrome-aws-lambda-layer
-     * @deprecated
+     * @see https://github.com/stefanzweifel/sidecar-browsershot-layer
      */
-    'layer' => env('SIDECAR_BROWSERSHOT_LAYER'),
+    'layers' => [
+        // "arn:aws:lambda:us-east-1:821527532446:layer:sidecar-browsershot-layer:1",
+        // "arn:aws:lambda:us-east-1:764866452798:layer:chrome-aws-lambda:37",
+    ],
 
     /**
-     * Define the path to the custom font directory.
+     * Path to local directory containing fonts to be installed in the Lambda function.
+     * During deployment, BorwsershotLambda will scan this directory for
+     * any files and will bundle them into the Lambda function.
      */
     'fonts' => resource_path('sidecar-browsershot/fonts'),
 ];
