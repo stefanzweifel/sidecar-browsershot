@@ -130,7 +130,7 @@ To perform image manipulations on the screenshot, you need to install the option
 // Take screenshot at 1920x1080 and scale it down to fit 200x200 
 BrowsershotLambda::url('https://example.com')
     ->windowSize(1920, 1080)
-    ->fit(Spatie\Image\Enums\Fit::Contain, 200, 200)
+    ->fit(\Spatie\Image\Enums\Fit::Contain, 200, 200)
     ->save('example.jpg');
     
 // Take screenshot at 1920x1080 and scale it down to fit 200x200 and save it on S3
@@ -138,7 +138,7 @@ BrowsershotLambda::url('https://example.com')
 // from S3 to the local disc of your app, manipulate it and then upload it back to S3. 
 BrowsershotLambda::url('https://example.com')
     ->windowSize(1920, 1080)
-    ->fit(Spatie\Image\Enums\Fit::Contain, 200, 200)
+    ->fit(\Spatie\Image\Enums\Fit::Contain, 200, 200)
     ->saveToS3('example.jpg');
 ```
 
