@@ -37,7 +37,8 @@
         "phpstan/phpstan-deprecation-rules": "^1.0",
         "phpstan/phpstan-phpunit": "^1.0",
         "phpunit/phpunit": "^10",
-        "spatie/image": "^3.3"
+        "spatie/image": "^3.3",
+        "spatie/pixelmatch-php": "^1.0"
     },
     "autoload": {
         "psr-4": {
