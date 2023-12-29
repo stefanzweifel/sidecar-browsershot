@@ -76,7 +76,7 @@ class BrowsershotFunction extends LambdaFunction
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function runtime()
     {
@@ -84,7 +84,7 @@ class BrowsershotFunction extends LambdaFunction
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function memory()
     {
@@ -118,7 +118,7 @@ class BrowsershotFunction extends LambdaFunction
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function warmingConfig()
     {
