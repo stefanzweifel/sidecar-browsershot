@@ -3,8 +3,8 @@
 use Hammerstone\Sidecar\Exceptions\LambdaExecutionException;
 use Illuminate\Support\Facades\Storage;
 use Spatie\Browsershot\Exceptions\CouldNotTakeBrowsershot;
+use Spatie\Image\Enums\Fit;
 use Spatie\Image\Image;
-use Spatie\Image\Manipulations;
 use Wnx\SidecarBrowsershot\BrowsershotLambda;
 
 beforeEach(function () {
@@ -122,7 +122,7 @@ it('applies image manipulations when calling save method', function () {
 
     BrowsershotLambda::url('https://example.com')
         ->windowSize(1920, 1080)
-        ->fit(Manipulations::FIT_CONTAIN, 200, 200)
+        ->fit(Fit::Contain, 200, 200)
         ->save('example.jpg');
 
     $image = new Image('example.jpg');
@@ -135,7 +135,7 @@ it('applies image manipulations when calling saveToS3 method', function () {
     // Create screenshot from example.com and resize it to 200x200
     BrowsershotLambda::url('https://example.com')
         ->windowSize(1920, 1080)
-        ->fit(Manipulations::FIT_CONTAIN, 200, 200)
+        ->fit(Fit::Contain, 200, 200)
         ->saveToS3('example.jpg');
 
     $this->assertTrue(Storage::disk('s3')->exists('example.jpg'));
