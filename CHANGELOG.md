@@ -5,7 +5,25 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-## [Unreleased](https://github.com/stefanzweifel/sidecar-browsershot/compare/v1.13.1...HEAD)
+## [Unreleased](https://github.com/stefanzweifel/sidecar-browsershot/compare/v2.0.0...HEAD)
+
+## [v2.0.0](https://github.com/stefanzweifel/sidecar-browsershot/compare/v1.13.1...v2.0.0) - 2023-12-30
+
+Maintenance release to support `spatie/browsershot` v4. Besides renaming a configuration key, there are no breaking changes. If you do image manipulations you now need to install `spatie/image` separately.
+
+We also dropped support for older PHP and Laravel versions to make maintenance easier.
+
+See our [upgrade guide](https://github.com/stefanzweifel/sidecar-browsershot/blob/5d3d8be55400ba461f7ff369e3a653d81ea6e3c3/UPGRADING.md#from-v1-to-v2) for details.
+
+### Changed
+
+- [BREAKING] Rename `sidecar-browsershot.layer`-config to `sidecar-browsershot.layers`-config ([#103](https://github.com/stefanzweifel/sidecar-browsershot/pull/103))
+- Support Browsershot v4 ([#107](https://github.com/stefanzweifel/sidecar-browsershot/pull/107))
+- Improve Reference Test to use Pixelmatch ([#108](https://github.com/stefanzweifel/sidecar-browsershot/pull/108))
+
+### Removed
+
+- Drop Support for PHP 8.0 and PHP 8.1 and Laravel 8 and Laravel 9 ([#106](https://github.com/stefanzweifel/sidecar-browsershot/pull/106))
 
 ## [v1.13.1](https://github.com/stefanzweifel/sidecar-browsershot/compare/v1.13.0...v1.13.1) - 2023-12-16
 
