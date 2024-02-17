@@ -4,6 +4,7 @@ namespace Wnx\SidecarBrowsershot\Tests;
 
 use Hammerstone\Sidecar\Providers\SidecarServiceProvider;
 use Illuminate\Foundation\Bootstrap\LoadEnvironmentVariables;
+use Imagick;
 use Orchestra\Testbench\TestCase as Orchestra;
 use Wnx\SidecarBrowsershot\Functions\BrowsershotFunction;
 use Wnx\SidecarBrowsershot\SidecarBrowsershotServiceProvider;
@@ -50,5 +51,21 @@ class TestCase extends Orchestra
             "/CreationDate (D:20230101000000+00'00')\n",
             "/ModDate (D:20230101000000+00'00')>>\n",
         ], $pdf, limit: 1);
+    }
+
+    public function assertPdfsAreSimilar(string $expected, string $actual): void
+    {
+        $expectedPdf = new Imagick();
+        $expectedPdf->readImageBlob($expected);
+        $expectedPdf->resetIterator();
+        $expectedPdf = $expectedPdf->appendImages(true);
+
+        $actualPdf = new Imagick();
+        $actualPdf->readImageBlob($actual);
+        $actualPdf->resetIterator();
+        $actualPdf = $actualPdf->appendImages(true);
+
+        $diff = $expectedPdf->compareImages($actualPdf, 1);
+        $this->assertSame(0.0, $diff[1]);
     }
 }
