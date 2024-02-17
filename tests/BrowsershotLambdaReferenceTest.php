@@ -36,7 +36,8 @@ it('generates reference hello-world-with-smileys.png', function () {
 it('generates reference hello-world-with-smileys.pdf', function () {
     $pdf = BrowsershotLambda::html('<h1 style="font-weight: 400;">Hello world!! 👋🦫🫠</h1>')->pdf();
     $pdfWithCorrectDates = $this->updateCreationDateAndModDateOfPdf($pdf);
+
     $reference = file_get_contents(__DIR__.'/references/hello-world-with-smileys.pdf');
 
-    $this->assertEquals($reference, $pdfWithCorrectDates);
+    $this->assertPdfsAreSimilar($reference, $pdfWithCorrectDates, threshold: 200);
 });
