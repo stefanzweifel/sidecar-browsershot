@@ -4,7 +4,9 @@ namespace Wnx\SidecarBrowsershot\Tests;
 
 use Hammerstone\Sidecar\Providers\SidecarServiceProvider;
 use Illuminate\Foundation\Bootstrap\LoadEnvironmentVariables;
+use Imagick;
 use Orchestra\Testbench\TestCase as Orchestra;
+use PHPUnit\Framework\Assert;
 use Wnx\SidecarBrowsershot\Functions\BrowsershotFunction;
 use Wnx\SidecarBrowsershot\SidecarBrowsershotServiceProvider;
 
@@ -50,5 +52,27 @@ class TestCase extends Orchestra
             "/CreationDate (D:20230101000000+00'00')\n",
             "/ModDate (D:20230101000000+00'00')>>\n",
         ], $pdf, limit: 1);
+    }
+
+    public function assertPdfsAreSimilar(string $expected, string $actual, float $threshold = 0): void
+    {
+        $expectedPdf = new Imagick();
+        $expectedPdf->readImageBlob($expected);
+        $expectedPdf->resetIterator();
+        $expectedPdf = $expectedPdf->appendImages(true);
+
+        $actualPdf = new Imagick();
+        $actualPdf->readImageBlob($actual);
+        $actualPdf->resetIterator();
+        $actualPdf = $actualPdf->appendImages(true);
+
+        $diff = $expectedPdf->compareImages($actualPdf, imagick::METRIC_ABSOLUTEERRORMETRIC);
+
+        $diffValue = $diff[1];
+
+        // Assert that the difference is less than or equal to the threshold
+        Assert::assertLessThanOrEqual($threshold, $diffValue, sprintf(
+            'The PDFs are not similar (Difference: %d)', $diffValue
+        ));
     }
 }

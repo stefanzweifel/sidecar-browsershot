@@ -134,16 +134,16 @@ class BrowsershotFunction extends LambdaFunction
         $region = config('sidecar.aws_region');
 
         if ($region === 'ap-northeast-2') {
-            $chromeAwsLambdaVersion = 36;
+            $chromeAwsLambdaVersion = 41;
         } else {
-            $chromeAwsLambdaVersion = 37;
+            $chromeAwsLambdaVersion = 42;
         }
 
         // Add Layers that each contain `puppeteer-core` and `@sparticuz/chromium`
         // https://github.com/stefanzweifel/sidecar-browsershot-layer
         // https://github.com/shelfio/chrome-aws-lambda-layer
         return [
-            "arn:aws:lambda:{$region}:821527532446:layer:sidecar-browsershot-layer:1",
+            "arn:aws:lambda:{$region}:821527532446:layer:sidecar-browsershot-layer:2",
             "arn:aws:lambda:{$region}:764866452798:layer:chrome-aws-lambda:{$chromeAwsLambdaVersion}",
         ];
     }
