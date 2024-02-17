@@ -43,8 +43,8 @@ return [
      * @see https://github.com/stefanzweifel/sidecar-browsershot-layer
      */
     'layers' => [
-        // "arn:aws:lambda:us-east-1:821527532446:layer:sidecar-browsershot-layer:1",
-        // "arn:aws:lambda:us-east-1:764866452798:layer:chrome-aws-lambda:37",
+        // "arn:aws:lambda:us-east-1:821527532446:layer:sidecar-browsershot-layer:2",
+        // "arn:aws:lambda:us-east-1:764866452798:layer:chrome-aws-lambda:42",
     ],
 
     /**
