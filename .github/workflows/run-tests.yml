@@ -35,6 +35,10 @@ jobs:
           coverage: pcov
           ini-values: pcov.directory=src
 
+      - name: Fix Imagick Policy for PDFs
+        run: |
+          sed -i 's/<policy domain="coder" rights="none" pattern="PDF" \/>/<policy domain="coder" rights="read|write" pattern="PDF" \/>/g' /etc/ImageMagick-6/policy.xml
+
       - name: Install dependencies
         run: |
           composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" --no-interaction --no-update
