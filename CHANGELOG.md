@@ -5,7 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-## [Unreleased](https://github.com/stefanzweifel/sidecar-browsershot/compare/v2.0.0...HEAD)
+## [Unreleased](https://github.com/stefanzweifel/sidecar-browsershot/compare/v2.1.0...HEAD)
+
+## [v2.1.0](https://github.com/stefanzweifel/sidecar-browsershot/compare/v2.0.0...v2.1.0) - 2024-02-17
+
+### Changed
+
+- Update used AWS Lambda Layers to use puppeteer-core v22 and Chromium v121.0.0 ([#113](https://github.com/stefanzweifel/sidecar-browsershot/pull/113))
 
 ## [v2.0.0](https://github.com/stefanzweifel/sidecar-browsershot/compare/v1.13.1...v2.0.0) - 2023-12-30
 
