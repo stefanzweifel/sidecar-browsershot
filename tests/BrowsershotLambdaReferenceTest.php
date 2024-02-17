@@ -40,4 +40,4 @@ it('generates reference hello-world-with-smileys.pdf', function () {
     $reference = file_get_contents(__DIR__.'/references/hello-world-with-smileys.pdf');
 
     $this->assertPdfsAreSimilar($reference, $pdfWithCorrectDates, threshold: 200);
-});
+})->group('pdf-comparison');
