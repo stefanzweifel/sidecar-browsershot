@@ -80,7 +80,7 @@ class BrowsershotFunction extends LambdaFunction
      */
     public function runtime()
     {
-        return 'nodejs18.x';
+        return 'nodejs20.x';
     }
 
     /**
