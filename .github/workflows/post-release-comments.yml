@@ -1,0 +1,9 @@
+name: Post Release Comments
+
+on:
+  release:
+    types: [released]
+
+jobs:
+  comments:
+    uses: stefanzweifel/reusable-workflows/.github/workflows/post-release-comments.yml@main
