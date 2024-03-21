@@ -39,7 +39,7 @@
         "phpstan/phpstan-phpunit": "^1.0",
         "phpunit/phpunit": "^10 | ^11.0",
         "spatie/image": "^3.3",
-        "spatie/pixelmatch-php": "^1.0"
+        "spatie/pixelmatch-php": "dev-main"
     },
     "autoload": {
         "psr-4": {
