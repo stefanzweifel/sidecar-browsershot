@@ -121,14 +121,18 @@ class BrowsershotLambda extends Browsershot
     public function applyManipulationsOnS3(string $imagePath, string $disk = 's3'): void
     {
         // Download the image from S3 to a temporary file and apply the manipulations.
-        Storage::disk('local')->put($imagePath, Storage::disk($disk)->get($imagePath));
+        /** @var string $fileContent */
+        $fileContent = Storage::disk($disk)->get($imagePath);
+        Storage::disk('local')->put($imagePath, $fileContent);
 
         $localPath = Storage::disk('local')->path($imagePath);
 
         $this->imageManipulations->apply($localPath);
 
         // Upload the manipulated image back to S3 and delete the temporary file.
-        Storage::disk($disk)->put($imagePath, Storage::disk('local')->get($imagePath));
+        /** @var string $fileContent */
+        $fileContent = Storage::disk('local')->get($imagePath);
+        Storage::disk($disk)->put($imagePath, $fileContent);
         Storage::disk('local')->delete($imagePath);
     }
 
