@@ -40,7 +40,11 @@ class BrowsershotFunction extends LambdaFunction
         // Check if the custom fonts folder exists.
         if (file_exists($fontDirectory)) {
             // Loop through all files in the custom fonts folder.
-            foreach (scandir($fontDirectory) as $file) {
+
+            /** @var array $fontFiles */
+            $fontFiles = scandir($fontDirectory);
+
+            foreach ($fontFiles as $file) {
                 if (is_file($fontDirectory.$file)) {
                     $fonts->prepend("fonts/$file", $fontDirectory.$file);
                 }
@@ -63,8 +67,10 @@ class BrowsershotFunction extends LambdaFunction
     protected function modifiedBrowserJs()
     {
         if (app()->environment('testing')) {
+            /** @var string $browser */
             $browser = file_get_contents('vendor/spatie/browsershot/bin/browser.cjs');
         } else {
+            /** @var string $browser */
             $browser = file_get_contents(base_path('vendor/spatie/browsershot/bin/browser.cjs'));
         }
 

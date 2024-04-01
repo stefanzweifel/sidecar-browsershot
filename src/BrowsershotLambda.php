@@ -14,6 +14,9 @@ use Wnx\SidecarBrowsershot\Functions\BrowsershotFunction;
 
 class BrowsershotLambda extends Browsershot
 {
+    /**
+     * @throws ElementNotFound
+     */
     protected function callBrowser(array $command): string
     {
         $url = Arr::get($command, 'url');
@@ -24,6 +27,7 @@ class BrowsershotLambda extends Browsershot
             $command['_html'] = file_get_contents($url);
         }
 
+        /** @var SettledResult $response */
         $response = BrowsershotFunction::execute($command);
 
         if ($response->isError()) {
