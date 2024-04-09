@@ -44,7 +44,7 @@ return [
      */
     'layers' => [
         // "arn:aws:lambda:us-east-1:821527532446:layer:sidecar-browsershot-layer:2",
-        // "arn:aws:lambda:us-east-1:764866452798:layer:chrome-aws-lambda:42",
+        // "arn:aws:lambda:us-east-1:764866452798:layer:chrome-aws-lambda:45",
     ],
 
     /**
