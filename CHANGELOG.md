@@ -5,7 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-## [Unreleased](https://github.com/stefanzweifel/sidecar-browsershot/compare/v2.3.2...HEAD)
+## [Unreleased](https://github.com/stefanzweifel/sidecar-browsershot/compare/v2.3.3...HEAD)
+
+## [v2.3.3](https://github.com/stefanzweifel/sidecar-browsershot/compare/v2.3.2...v2.3.3) - 2024-05-16
+
+### Fixed
+
+- Fix downstream breaking change in throw() method by passing default value [a682b2](https://github.com/stefanzweifel/sidecar-browsershot/commit/a682b2d6cc5dfc47bc9e26526417a3f233f9b0e4)
 
 ## [v2.3.2](https://github.com/stefanzweifel/sidecar-browsershot/compare/v2.3.1...v2.3.2) - 2024-05-16
 
