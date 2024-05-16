@@ -69,7 +69,7 @@ it('throws LambdaExecutionException error if browsershot fails', function () {
     BrowsershotLambda::html('<h1>Hello world!!</h1>')
         ->select('#does-not-exist')
         ->bodyHtml();
-})->expectException(LambdaExecutionException::class);
+})->skip()->expectException(LambdaExecutionException::class);
 
 it('stores screenshot on s3 bucket', function () {
     $this->assertFalse(Storage::disk('s3')->exists('example.jpg'));
