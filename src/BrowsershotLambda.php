@@ -81,7 +81,7 @@ class BrowsershotLambda extends Browsershot
             throw new ElementNotFound($selector);
         }
 
-        $response->throw();
+        $response->throw(2);
     }
 
     /**
