@@ -141,7 +141,7 @@ class BrowsershotLambda extends Browsershot
      */
     public static function readHtmlFromS3(string $sourcePath, string $disk = 's3'): self
     {
-        return (new BrowsershotLambda())
+        return (new BrowsershotLambda)
             ->setOption('s3Source', [
                 'path' => $sourcePath,
                 'region' => config('sidecar.aws_region'),

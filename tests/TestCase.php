@@ -56,12 +56,12 @@ class TestCase extends Orchestra
 
     public function assertPdfsAreSimilar(string $expected, string $actual, float $threshold = 0): void
     {
-        $expectedPdf = new Imagick();
+        $expectedPdf = new Imagick;
         $expectedPdf->readImageBlob($expected);
         $expectedPdf->resetIterator();
         $expectedPdf = $expectedPdf->appendImages(true);
 
-        $actualPdf = new Imagick();
+        $actualPdf = new Imagick;
         $actualPdf->readImageBlob($actual);
         $actualPdf->resetIterator();
         $actualPdf = $actualPdf->appendImages(true);
