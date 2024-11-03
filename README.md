@@ -48,6 +48,9 @@ php artisan sidecar:deploy --activate
 
 See [Sidecar documentation](https://hammerstone.dev/sidecar/docs/main/functions/deploying) for details.
 
+> [!Note]
+> You should redeploy the Lambda function, whenever you upgrade `spatie/browsershot`.
+
 ## Usage
 
 You can use `BrowsershotLambda` like the default `Browsershot`-class coming from the Spatie package.
