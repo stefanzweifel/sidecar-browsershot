@@ -16,6 +16,7 @@ jobs:
         os: [ubuntu-latest]
         php: [8.2, 8.3, 8.4]
         laravel: [10.*, 11.*]
+        browsershot: [4.*, 5.*]
         stability: [prefer-lowest, prefer-stable]
         include:
           - laravel: 10.*
@@ -43,7 +44,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" --no-interaction --no-update
+          composer require "laravel/framework:${{ matrix.laravel }}" "spatie/browsershot:${{ matrix.browsershot }}" "orchestra/testbench:${{ matrix.testbench }}" --no-interaction --no-update
           composer update --${{ matrix.stability }} --prefer-dist --no-interaction
           npm ci
 
