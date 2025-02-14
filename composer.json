@@ -27,7 +27,6 @@
     },
     "require-dev": {
         "ext-imagick": "*",
-        "larastan/larastan": "^2.0|^3.0",
         "laravel/pint": "^1.13",
         "league/flysystem-aws-s3-v3": "^1.0|^2.0|^3.0",
         "nunomaduro/collision": "^7.0|^8.0",
