@@ -78,7 +78,7 @@ exports.handle = async function (event) {
     // Delete puppeteer profiles from temp directory to free up space
     fs.readdirSync('/tmp').forEach(file => {
         if (file.startsWith('puppeteer_dev_chrome_profile')) {
-            fs.rmdirSync(`/tmp/${file}`, { recursive: true });
+            fs.rm(`/tmp/${file}`, { recursive: true });
         }
     });
 
