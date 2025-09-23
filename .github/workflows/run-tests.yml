@@ -22,7 +22,7 @@ jobs:
           - laravel: 12.*
             testbench: ^10.0
 
-    name: P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.stability }} - ${{ matrix.os }}
+    name: P${{ matrix.php }} - L${{ matrix.laravel }} - Browsershot${{matrix.browsershot}} - ${{ matrix.stability }} - ${{ matrix.os }}
 
     steps:
       - name: Checkout code
