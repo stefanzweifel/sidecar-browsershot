@@ -14,6 +14,13 @@ beforeEach(function () {
     if (file_exists('example.jpg')) {
         unlink('example.jpg');
     }
+
+    if (Storage::disk('s3')->exists('example.jpg')) {
+        Storage::disk('s3')->delete('example.jpg');
+    }
+    if (Storage::disk('s3')->exists('example.pdf')) {
+        Storage::disk('s3')->delete('example.pdf');
+    }
 });
 
 afterAll(function () {
@@ -22,6 +29,12 @@ afterAll(function () {
     }
     if (file_exists('example.jpg')) {
         unlink('example.jpg');
+    }
+    if (Storage::disk('s3')->exists('example.jpg')) {
+        Storage::disk('s3')->delete('example.jpg');
+    }
+    if (Storage::disk('s3')->exists('example.pdf')) {
+        Storage::disk('s3')->delete('example.pdf');
     }
 });
 
