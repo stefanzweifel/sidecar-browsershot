@@ -150,7 +150,7 @@ class BrowsershotFunction extends LambdaFunction
         // https://github.com/stefanzweifel/sidecar-browsershot-layer
         // https://github.com/shelfio/chrome-aws-lambda-layer
         return [
-            "arn:aws:lambda:{$region}:821527532446:layer:sidecar-browsershot-layer:3",
+            "arn:aws:lambda:{$region}:821527532446:layer:sidecar-browsershot-layer:2",
             "arn:aws:lambda:{$region}:764866452798:layer:chrome-aws-lambda:{$chromeAwsLambdaVersion}",
         ];
     }
