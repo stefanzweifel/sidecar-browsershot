@@ -141,9 +141,9 @@ class BrowsershotFunction extends LambdaFunction
         $region = config('sidecar.aws_region');
 
         if ($region === 'ap-northeast-2') {
-            $chromeAwsLambdaVersion = 106;
+            $chromeAwsLambdaVersion = 52;
         } else {
-            $chromeAwsLambdaVersion = 107;
+            $chromeAwsLambdaVersion = 53;
         }
 
         // Add Layers that each contain `puppeteer-core` and `@sparticuz/chromium`
