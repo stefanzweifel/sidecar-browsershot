@@ -5,6 +5,7 @@ namespace Wnx\SidecarBrowsershot\Functions;
 use Hammerstone\Sidecar\Architecture;
 use Hammerstone\Sidecar\LambdaFunction;
 use Hammerstone\Sidecar\Package;
+use Hammerstone\Sidecar\Runtime;
 use Hammerstone\Sidecar\WarmingConfig;
 use Illuminate\Support\Str;
 
@@ -86,7 +87,7 @@ class BrowsershotFunction extends LambdaFunction
      */
     public function runtime()
     {
-        return 'nodejs20.x';
+        return Runtime::NODEJS_22;
     }
 
     /**
