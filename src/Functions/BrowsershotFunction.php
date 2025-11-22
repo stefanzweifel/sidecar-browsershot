@@ -87,7 +87,7 @@ class BrowsershotFunction extends LambdaFunction
      */
     public function runtime()
     {
-        return Runtime::NODEJS_20;
+        return Runtime::NODEJS_22;
     }
 
     /**
@@ -141,9 +141,9 @@ class BrowsershotFunction extends LambdaFunction
         $region = config('sidecar.aws_region');
 
         if ($region === 'ap-northeast-2') {
-            $chromeAwsLambdaVersion = 49;
+            $chromeAwsLambdaVersion = 52;
         } else {
-            $chromeAwsLambdaVersion = 50;
+            $chromeAwsLambdaVersion = 53;
         }
 
         // Add Layers that each contain `puppeteer-core` and `@sparticuz/chromium`
