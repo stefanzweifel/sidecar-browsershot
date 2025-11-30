@@ -16,7 +16,7 @@ jobs:
         os: [ubuntu-latest]
         php: [8.4]
         laravel: [12.*]
-        browsershot: [4.*, 5.*]
+        browsershot: [5.*]
         stability: [prefer-lowest, prefer-stable]
         include:
           - laravel: 12.*
