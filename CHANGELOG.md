@@ -5,7 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-## [Unreleased](https://github.com/stefanzweifel/sidecar-browsershot/compare/v2.7.0...HEAD)
+## [Unreleased](https://github.com/stefanzweifel/sidecar-browsershot/compare/v2.7.1...HEAD)
+
+## [v2.7.1](https://github.com/stefanzweifel/sidecar-browsershot/compare/v2.7.0...v2.7.1) - 2026-03-07
+
+### Added
+
+- Upgrade sidecar-browsershot-layer and use Puppeteer v24 ([#153](https://github.com/stefanzweifel/sidecar-browsershot/pull/153))
+- Add Support for PHP 8.5 ([#149](https://github.com/stefanzweifel/sidecar-browsershot/pull/149))
+
+### Changed
+
+- Drop Support for Browsershot v4 ([#150](https://github.com/stefanzweifel/sidecar-browsershot/pull/150))
 
 ## [v2.7.0](https://github.com/stefanzweifel/sidecar-browsershot/compare/v2.6.1...v2.7.0) - 2025-11-22
 
