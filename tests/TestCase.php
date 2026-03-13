@@ -66,7 +66,7 @@ class TestCase extends Orchestra
         $actualPdf->resetIterator();
         $actualPdf = $actualPdf->appendImages(true);
 
-        $diff = $expectedPdf->compareImages($actualPdf, imagick::METRIC_ABSOLUTEERRORMETRIC);
+        $diff = $expectedPdf->compareImages($actualPdf, Imagick::METRIC_ABSOLUTEERRORMETRIC);
 
         $diffValue = $diff[1];
 
