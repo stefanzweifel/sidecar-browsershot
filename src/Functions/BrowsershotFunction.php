@@ -41,8 +41,6 @@ class BrowsershotFunction extends LambdaFunction
         // Check if the custom fonts folder exists.
         if (file_exists($fontDirectory)) {
             // Loop through all files in the custom fonts folder.
-
-            /** @var array $fontFiles */
             $fontFiles = scandir($fontDirectory);
 
             foreach ($fontFiles as $file) {

@@ -16,15 +16,20 @@ class InternalBrowsershotSetupCommand extends Command
 
     public function handle(): int
     {
+        /** @phpstan-ignore larastan.noEnvCallsOutsideOfConfig  */
         $region = env('SIDECAR_REGION');
+        /** @phpstan-ignore larastan.noEnvCallsOutsideOfConfig  */
         $bucket = env('SIDECAR_ARTIFACT_BUCKET_NAME');
 
         config()->set('sidecar.functions', [BrowsershotFunction::class]);
         config()->set('sidecar.env', 'testing');
+        /** @phpstan-ignore larastan.noEnvCallsOutsideOfConfig  */
         config()->set('sidecar.aws_key', env('SIDECAR_ACCESS_KEY_ID'));
+        /** @phpstan-ignore larastan.noEnvCallsOutsideOfConfig  */
         config()->set('sidecar.aws_secret', env('SIDECAR_SECRET_ACCESS_KEY'));
         config()->set('sidecar.aws_region', $region);
         config()->set('sidecar.aws_bucket', $bucket);
+        /** @phpstan-ignore larastan.noEnvCallsOutsideOfConfig  */
         config()->set('sidecar.execution_role', env('SIDECAR_EXECUTION_ROLE'));
 
         $deploy = $this->confirm("Deploy Lambda function to {$region} and bucket {$bucket}?", true);
