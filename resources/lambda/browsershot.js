@@ -15,11 +15,8 @@ exports.handle = async function (event) {
     // Disable webgl.
     chromium.setGraphicsMode = false;
 
-    // Add custom fonts to chromium.
-    const fontsFileNames = fs.readdirSync('/var/task/fonts/');
-    for (const fontFileName of fontsFileNames) {
-        await chromium.font(`/var/task/fonts/${fontFileName}`);
-    }
+    // Custom fonts are auto-loaded by @sparticuz/chromium from /var/task/fonts/
+    // (chromium.font() was removed in @sparticuz/chromium v144+)
 
     // Constant file where we write out options.
     const options = '/tmp/browsershot.js';
