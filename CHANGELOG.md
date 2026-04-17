@@ -5,7 +5,24 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-## [Unreleased](https://github.com/stefanzweifel/sidecar-browsershot/compare/v2.9.0...HEAD)
+## [Unreleased](https://github.com/stefanzweifel/sidecar-browsershot/compare/v3.0.0...HEAD)
+
+## [v3.0.0](https://github.com/stefanzweifel/sidecar-browsershot/compare/v2.9.0...v3.0.0) - 2026-04-17
+
+### Changed
+
+- Upgrade Chromium Layer to use Chromium v147 [#159](https://github.com/stefanzweifel/sidecar-browsershot/pull/159)
+
+### Fixed
+
+- Upgrade browsershot-layer to fix https://github.com/patrickjuchli/basic-ftp/security/advisories/GHSA-rp42-5vxx-qpwr [#158](https://github.com/stefanzweifel/sidecar-browsershot/pull/158)
+
+### Removed
+
+- (Breaking) Drop unsupported `chromium.font()` call ([#156](https://github.com/stefanzweifel/sidecar-browsershot/pull/156))
+
+Breaking change as you as a consumer of the package can override the Chromium layer used in this package. If you've overriden [chrome-aws-lambda-layer](https://github.com/shelfio/chrome-aws-lambda-layer) in the sidecar-browsershot configuration, please note that the package no longer calls `chromium.font()` internally.
+The package continues to automatically load custom fonts from `resources/sidecar-browsershot/fonts`. (See [README](https://github.com/stefanzweifel/sidecar-browsershot?tab=readme-ov-file#register-custom-fonts))
 
 ## [v2.9.0](https://github.com/stefanzweifel/sidecar-browsershot/compare/v2.8.0...v2.9.0) - 2026-03-13
 
