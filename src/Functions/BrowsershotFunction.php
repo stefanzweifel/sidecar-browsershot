@@ -145,9 +145,9 @@ class BrowsershotFunction extends LambdaFunction
         }
 
         if ($region === 'us-east-1') {
-            $sidecarBrowsershotLayerVersion = 5;
+            $sidecarBrowsershotLayerVersion = 6;
         } else {
-            $sidecarBrowsershotLayerVersion = 4;
+            $sidecarBrowsershotLayerVersion = 5;
         }
 
         // Add Layers that each contain `puppeteer-core` and `@sparticuz/chromium`
