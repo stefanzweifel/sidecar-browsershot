@@ -139,9 +139,9 @@ class BrowsershotFunction extends LambdaFunction
         $region = config('sidecar.aws_region');
 
         if ($region === 'ap-northeast-2') {
-            $chromeAwsLambdaVersion = 52;
+            $chromeAwsLambdaVersion = 110;
         } else {
-            $chromeAwsLambdaVersion = 53;
+            $chromeAwsLambdaVersion = 111;
         }
 
         if ($region === 'us-east-1') {
