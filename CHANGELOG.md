@@ -5,7 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-## [Unreleased](https://github.com/stefanzweifel/sidecar-browsershot/compare/v3.0.0...HEAD)
+## [Unreleased](https://github.com/stefanzweifel/sidecar-browsershot/compare/v3.1.0...HEAD)
+
+## [v3.1.0](https://github.com/stefanzweifel/sidecar-browsershot/compare/v3.0.0...v3.1.0) - 2026-05-07
+
+### Changed
+
+- Run on Node 24 ([#161](https://github.com/stefanzweifel/sidecar-browsershot/pull/161))
+
+### Fixed
+
+- Update to the latest sidecar-browsershot-layer to fix NPM security vulnerabilities ([#162](https://github.com/stefanzweifel/sidecar-browsershot/pull/162))
 
 ## [v3.0.0](https://github.com/stefanzweifel/sidecar-browsershot/compare/v2.9.0...v3.0.0) - 2026-04-17
 
