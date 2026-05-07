@@ -85,7 +85,7 @@ class BrowsershotFunction extends LambdaFunction
      */
     public function runtime()
     {
-        return Runtime::NODEJS_22;
+        return 'nodejs24.x';
     }
 
     /**
