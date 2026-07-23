@@ -107,6 +107,8 @@ class BrowsershotLambda extends Browsershot
 
         $output = $this->callBrowser($command);
 
+        $this->cleanupTemporaryHtmlFile();
+
         if (empty($output)) {
             throw CouldNotTakeBrowsershot::chromeOutputEmpty("$targetPath on S3 disk: $disk", $output, $command);
         }

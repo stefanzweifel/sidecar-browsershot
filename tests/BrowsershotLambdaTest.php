@@ -166,3 +166,21 @@ it('applies image manipulations when calling saveToS3 method', function () {
     Storage::disk('s3')->delete('example.jpg');
     $this->assertFalse(Storage::disk('s3')->exists('example.jpg'));
 });
+
+it('cleans up temporary html file when saving to s3', function () {
+    $browsershot = BrowsershotLambda::html('<h1>Hello world!!</h1>');
+
+    $browsershot->saveToS3('example.pdf');
+
+    $reflection = new ReflectionClass($browsershot);
+    $property = $reflection->getProperty('temporaryHtmlDirectory');
+    $property->setAccessible(true);
+
+    $temporaryDirectory = $property->getValue($browsershot);
+
+    $this->assertNotNull($temporaryDirectory);
+
+    $this->assertDirectoryDoesNotExist($temporaryDirectory->path());
+
+    Storage::disk('s3')->delete('example.pdf');
+});
