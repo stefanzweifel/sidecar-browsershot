@@ -69,7 +69,7 @@ it('generates pdf from html', function () {
 it('returns raw html from url', function () {
     $html = BrowsershotLambda::url('https://example.com')->bodyHtml();
 
-    $this->assertStringContainsString('<h1>Example Domain</h1>', $html);
+    $this->assertStringContainsString('<title>Example Domain</title>', $html);
 });
 
 it('returns raw html from html', function () {
