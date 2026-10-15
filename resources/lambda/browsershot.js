@@ -69,7 +69,14 @@ exports.handle = async function (event) {
     // Exec spatie's browser command.
     let result = execSync(`node ./browser.cjs '-f file://${options}'`, {
         // Set maxBuffer to 100 MB
-        maxBuffer: 1024 * 1024 * 100
+        maxBuffer: 1024 * 1024 * 100,
+        // puppeteer-core v25 is ESM-only. Lambda starts Node with
+        // --no-experimental-require-module, so re-enable it for browser.cjs,
+        // which loads puppeteer-core with require().
+        env: {
+            ...process.env,
+            NODE_OPTIONS: `${process.env.NODE_OPTIONS || ''} --experimental-require-module`.trim(),
+        },
     });
 
     // Delete puppeteer profiles from temp directory to free up space
