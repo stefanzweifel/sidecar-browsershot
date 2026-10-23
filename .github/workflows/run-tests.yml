@@ -14,7 +14,7 @@ jobs:
       max-parallel: 1
       matrix:
         os: [ubuntu-latest]
-        php: [8.5, 8.4]
+        php: [8.6, 8.5, 8.4]
         laravel: [12.*, 13.*]
         browsershot: [5.*]
         stability: [prefer-lowest, prefer-stable]
@@ -45,7 +45,7 @@ jobs:
       - name: Install dependencies
         run: |
           composer require "laravel/framework:${{ matrix.laravel }}" "spatie/browsershot:${{ matrix.browsershot }}" "orchestra/testbench:${{ matrix.testbench }}" --no-interaction --no-update
-          composer update --${{ matrix.stability }} --prefer-dist --no-interaction
+          composer update --${{ matrix.stability }} --prefer-dist --no-interaction ${{ matrix.php == '8.6' && '--ignore-platform-req=php' || '' }}
           npm ci
 
         # Secrets used by vendor/bin/testbench have to be declared inside testbench.yaml. env() can't be used.
