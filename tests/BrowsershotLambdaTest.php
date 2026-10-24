@@ -168,19 +168,17 @@ it('applies image manipulations when calling saveToS3 method', function () {
 });
 
 it('cleans up temporary html file when saving to s3', function () {
-    $browsershot = BrowsershotLambda::html('<h1>Hello world!!</h1>');
+    $tempPath = sys_get_temp_dir().'/sidecar-browsershot-'.uniqid();
+    mkdir($tempPath);
+
+    $browsershot = BrowsershotLambda::html('<h1>Hello world!!</h1>')
+        ->setCustomTempPath($tempPath);
 
     $browsershot->saveToS3('example.pdf');
 
-    $reflection = new ReflectionClass($browsershot);
-    $property = $reflection->getProperty('temporaryHtmlDirectory');
-    $property->setAccessible(true);
+    $this->assertEmpty(glob($tempPath.'/*/index.html'));
 
-    $temporaryDirectory = $property->getValue($browsershot);
-
-    $this->assertNotNull($temporaryDirectory);
-
-    $this->assertDirectoryDoesNotExist($temporaryDirectory->path());
+    rmdir($tempPath);
 
     Storage::disk('s3')->delete('example.pdf');
 });
