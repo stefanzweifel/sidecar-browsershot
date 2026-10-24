@@ -6,6 +6,12 @@ on:
   pull_request:
     branches: [main]
 
+# The tests deploy to one Lambda function and share S3 keys. Overlapping runs
+# (for example a push to main and a pull request) conflict with each other.
+concurrency:
+  group: sidecar-aws-tests
+  cancel-in-progress: false
+
 jobs:
   test:
     runs-on: ${{ matrix.os }}
@@ -18,6 +24,10 @@ jobs:
         laravel: [12.*, 13.*]
         browsershot: [5.*]
         stability: [prefer-lowest, prefer-stable]
+        # Laravel 12 raises PHP 8.6 deprecations that fail the suite.
+        exclude:
+          - php: 8.6
+            laravel: 12.*
         include:
           - laravel: 12.*
             testbench: ^10.0
