@@ -55,7 +55,7 @@ jobs:
       - name: Install dependencies
         run: |
           composer require "laravel/framework:${{ matrix.laravel }}" "spatie/browsershot:${{ matrix.browsershot }}" "orchestra/testbench:${{ matrix.testbench }}" --no-interaction --no-update
-          composer update --${{ matrix.stability }} --prefer-dist --no-interaction ${{ matrix.php == '8.6' && '--ignore-platform-req=php' || '' }}
+          composer update --${{ matrix.stability }} --prefer-dist --no-interaction
           npm ci
 
         # Secrets used by vendor/bin/testbench have to be declared inside testbench.yaml. env() can't be used.
