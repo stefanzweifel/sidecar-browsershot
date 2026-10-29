@@ -72,11 +72,13 @@ class BrowsershotFunction extends LambdaFunction
             $browser = file_get_contents(base_path('vendor/spatie/browsershot/bin/browser.cjs'));
         }
 
-        // Remove their reference.
-        $browser = str_replace('const puppet = (pup || require(\'puppeteer\'));', '', $browser);
-
-        // Use pupeteer-core instead.
-        return "const puppet = require('puppeteer-core'); \n".$browser;
+        // Load puppeteer-core instead of puppeteer. Covers require('puppeteer')
+        // and require.resolve('puppeteer') used by Browsershot's loadPuppeteer().
+        return preg_replace(
+            '/require(\.resolve)?\(([\'"])puppeteer\2\)/',
+            'require$1($2puppeteer-core$2)',
+            $browser
+        );
     }
 
     /**
