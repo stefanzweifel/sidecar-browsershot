@@ -1,12 +1,13 @@
 const fs = require('fs');
 const { execSync } = require('child_process');
-const chromium = require('@sparticuz/chromium');
 const { S3 } = require("@aws-sdk/client-s3");
 
 exports.handle = async function (event) {
     if (event.warming) {
         return;
     }
+
+    const { default: chromium } = await import('@sparticuz/chromium');
 
     // sparticuz/chromium specific settings.
     // https://github.com/Sparticuz/chromium#usage

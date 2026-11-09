@@ -1,6 +1,9 @@
 {
   "name": "sidecar-browsershot",
   "version": "1.0.0",
+  "scripts": {
+    "test": "node --test tests/lambda/*.test.cjs"
+  },
   "dependencies": {
     "pixelmatch": "^7.1"
   }
