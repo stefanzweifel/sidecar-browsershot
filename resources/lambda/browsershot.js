@@ -7,6 +7,16 @@ exports.handle = async function (event) {
         return;
     }
 
+    cleanupTemporaryFiles();
+
+    try {
+        return await render(event);
+    } finally {
+        cleanupTemporaryFiles();
+    }
+};
+
+async function render(event) {
     const { default: chromium } = await import('@sparticuz/chromium');
 
     // sparticuz/chromium specific settings.
@@ -80,18 +90,9 @@ exports.handle = async function (event) {
         },
     });
 
-    // Delete puppeteer profiles from temp directory to free up space
-    fs.readdirSync('/tmp').forEach(file => {
-        if (file.startsWith('puppeteer_dev_chrome_profile')) {
-            fs.rmdirSync(`/tmp/${file}`, { recursive: true });
-        }
-    });
-
     // If there was a path, then read the file and return it.
     if (event.options.path) {
         let contents = fs.readFileSync(event.options.path);
-
-        fs.unlinkSync(event.options.path);
 
         // If the file destination is S3, then write
         // the file and return the ETag as confirmation.
@@ -134,7 +135,25 @@ exports.handle = async function (event) {
 
     // Otherwise, return the string.
     return result.toString();
-};
+}
+
+function cleanupTemporaryFiles() {
+    const files = ['index.html', 'browsershot.js', 'browsershot'];
+
+    try {
+        files.push(...fs.readdirSync('/tmp').filter(file => file.startsWith('puppeteer_dev_chrome_profile')));
+    } catch (error) {
+        console.warn('Browsershot could not list temporary profiles', { code: error.code });
+    }
+
+    for (const file of files) {
+        try {
+            fs.rmSync(`/tmp/${file}`, { recursive: true, force: true });
+        } catch (error) {
+            console.warn('Browsershot could not remove a temporary file', { code: error.code });
+        }
+    }
+}
 
 /**
  * Read a stream into a string.
