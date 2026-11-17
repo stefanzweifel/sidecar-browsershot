@@ -42,6 +42,7 @@ for (const moduleType of ['module', 'commonjs']) {
                             return {
                                 writeFileSync: (file, contents) => { options = JSON.parse(contents); },
                                 readdirSync: () => [],
+                                rmSync: () => {},
                             };
                         }
                         if (name === 'child_process') {
