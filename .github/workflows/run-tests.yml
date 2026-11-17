@@ -48,9 +48,14 @@ jobs:
           coverage: pcov
           ini-values: pcov.directory=src
 
+        # The ImageMagick config directory differs between runner images.
+        # Ubuntu 24.04 has /etc/ImageMagick-6, Ubuntu 26.04 does not.
       - name: Fix Imagick Policy for PDFs
         run: |
-          sudo sed -i 's/<policy domain="coder" rights="none" pattern="PDF" \/>/<policy domain="coder" rights="read|write" pattern="PDF" \/>/g' /etc/ImageMagick-6/policy.xml
+          for policy in /etc/ImageMagick-*/policy.xml; do
+            [ -f "$policy" ] || continue
+            sudo sed -i 's/<policy domain="coder" rights="none" pattern="PDF" \/>/<policy domain="coder" rights="read|write" pattern="PDF" \/>/g' "$policy"
+          done
 
       - name: Install dependencies
         run: |
