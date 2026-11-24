@@ -27,6 +27,9 @@ class BrowsershotLambda extends Browsershot
             $command['_html'] = file_get_contents($url);
         }
 
+        // Passed per invocation so changing the config does not require a redeploy.
+        $command['_keepCrashDumps'] = (bool) config('sidecar-browsershot.keep_crash_dumps');
+
         /** @var SettledResult $response */
         $response = BrowsershotFunction::execute($command);
 

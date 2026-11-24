@@ -18,6 +18,13 @@ return [
     'storage' => env('SIDECAR_BROWSERSHOT_STORAGE', 512),
 
     /**
+     * Keep Chromium crash dumps (/tmp/core.*) on the Lambda instance. (Defaults to false)
+     * Each dump is about 70MB. Warm instances keep them between invocations,
+     * so a few crashes can fill the default 512MB of ephemeral storage.
+     */
+    'keep_crash_dumps' => env('SIDECAR_BROWSERSHOT_KEEP_CRASH_DUMPS', false),
+
+    /**
      * The default timeout to use for SidecarBrowsershot, in seconds. (Defaults to 300)
      *
      * @see https://hammerstone.dev/sidecar/docs/main/functions/customization#timeout
