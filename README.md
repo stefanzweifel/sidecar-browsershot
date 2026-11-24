@@ -89,7 +89,7 @@ Alternatively you can publish the `sidecar-browsershot.php` config file and chan
 
 When Chromium crashes, it can write a core dump of about 70MB to `/tmp` on the Lambda instance. Warm instances keep `/tmp` between invocations, so a few crashes can fill the default 512MB of ephemeral storage and make later renders fail with `ENOSPC: no space left on device`.
 
-sidecar-browsershot disables these dumps and removes any leftover `/tmp/core.*` files before and after each render. If you need the dumps to debug Chromium crashes, set `SIDECAR_BROWSERSHOT_KEEP_CRASH_DUMPS` in your `.env`:
+sidecar-browsershot disables these dumps and removes any leftover `/tmp/core.*` files before and after each render. This happens inside the Lambda function, so run `php artisan sidecar:deploy --activate` after updating the package. If you need the dumps to debug Chromium crashes, set `SIDECAR_BROWSERSHOT_KEEP_CRASH_DUMPS` in your `.env`:
 
 ```shell
 SIDECAR_BROWSERSHOT_KEEP_CRASH_DUMPS=true
