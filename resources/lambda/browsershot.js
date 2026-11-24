@@ -7,12 +7,12 @@ exports.handle = async function (event) {
         return;
     }
 
-    cleanupTemporaryFiles();
+    cleanupTemporaryFiles(event);
 
     try {
         return await render(event);
     } finally {
-        cleanupTemporaryFiles();
+        cleanupTemporaryFiles(event);
     }
 };
 
@@ -77,8 +77,12 @@ async function render(event) {
     // Write the options to disk
     fs.writeFileSync(options, JSON.stringify(event));
 
-    // Exec spatie's browser command.
-    let result = execSync(`node ./browser.cjs '-f file://${options}'`, {
+    const command = `node ./browser.cjs '-f file://${options}'`;
+
+    // Exec spatie's browser command. Chromium crash dumps are ~70MB each and
+    // stay in /tmp on warm instances, so disable them unless the developer
+    // opted in to keep them.
+    let result = execSync(event._keepCrashDumps === true ? command : `ulimit -c 0 && ${command}`, {
         // Set maxBuffer to 100 MB
         maxBuffer: 1024 * 1024 * 100,
         // puppeteer-core v25 is ESM-only. Lambda starts Node with
@@ -137,11 +141,16 @@ async function render(event) {
     return result.toString();
 }
 
-function cleanupTemporaryFiles() {
+function cleanupTemporaryFiles(event) {
     const files = ['index.html', 'browsershot.js', 'browsershot'];
+    const prefixes = ['puppeteer_dev_chrome_profile'];
+
+    if (event._keepCrashDumps !== true) {
+        prefixes.push('core.');
+    }
 
     try {
-        files.push(...fs.readdirSync('/tmp').filter(file => file.startsWith('puppeteer_dev_chrome_profile')));
+        files.push(...fs.readdirSync('/tmp').filter(file => prefixes.some(prefix => file.startsWith(prefix))));
     } catch (error) {
         console.warn('Browsershot could not list temporary profiles', { code: error.code });
     }

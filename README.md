@@ -85,6 +85,18 @@ SIDECAR_BROWSERSHOT_WARMING_INSTANCES=5
 
 Alternatively you can publish the `sidecar-browsershot.php` config file and change the `warming` setting yourself.
 
+## Chromium crash dumps
+
+When Chromium crashes, it can write a core dump of about 70MB to `/tmp` on the Lambda instance. Warm instances keep `/tmp` between invocations, so a few crashes can fill the default 512MB of ephemeral storage and make later renders fail with `ENOSPC: no space left on device`.
+
+sidecar-browsershot disables these dumps and removes any leftover `/tmp/core.*` files before and after each render. This happens inside the Lambda function, so run `php artisan sidecar:deploy --activate` after updating the package. If you need the dumps to debug Chromium crashes, set `SIDECAR_BROWSERSHOT_KEEP_CRASH_DUMPS` in your `.env`:
+
+```shell
+SIDECAR_BROWSERSHOT_KEEP_CRASH_DUMPS=true
+```
+
+Keep in mind that the dumps then count towards the function's ephemeral storage. You can raise it with `SIDECAR_BROWSERSHOT_STORAGE`.
+
 ## Reading source from S3
 
 You can store an HTML file on AWS S3 and pass the path to Lambda for it to create the PDF or image from. 
