@@ -1,7 +1,7 @@
 <?php
 
-use Hammerstone\Sidecar\Sidecar;
 use Hammerstone\Sidecar\Results\SettledResult;
+use Hammerstone\Sidecar\Sidecar;
 use Wnx\SidecarBrowsershot\BrowsershotLambda;
 use Wnx\SidecarBrowsershot\Functions\BrowsershotFunction;
 
